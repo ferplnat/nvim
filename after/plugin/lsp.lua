@@ -47,7 +47,27 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
+-- Azure Pipelines
+lsp.configure('azure_pipelines_ls', {
+    settings = {
+        yaml = {
+            schemas = {
+                ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
+                    "Azure*/**/*.yaml",
+                    "Azure*/**/*.yml",
+                },
+            },
+        },
+    },
+})
+
+-- POWERSHELL
+lsp.configure('powershell_es', {
+    shell = "powershell.exe"
+})
+
 lsp.setup()
+
 
 vim.diagnostic.config({
     virtual_text = true
