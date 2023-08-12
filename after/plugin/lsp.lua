@@ -8,17 +8,20 @@ require('mason-lspconfig').setup({
 })
 
 local lspconfig = require('lspconfig')
+local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('mason-lspconfig').setup_handlers({
   function(server_name)
-    lspconfig[server_name].setup({})
+    lspconfig[server_name].setup({
+            capabilities = lsp_capabilities
+        })
   end,
 })
 
 -- LSP Server Specific Configs
 
 lspconfig.powershell_es.setup({
-    shell = "powershell.exe"
+    shell = "powershell.exe" -- Make sure we're using Windows PowerShell 5.1
 })
 
 lspconfig.azure_pipelines_ls.setup({
@@ -26,8 +29,10 @@ lspconfig.azure_pipelines_ls.setup({
         yaml = {
             schemas = {
                 ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
-                    "Azure*/**/*.yaml",
-                    "Azure*/**/*.yml",
+                    "**Azure*/**/*.yaml",
+                    "**Azure*/**/*.yml",
+                    "**AzDO*/**/*.yml",
+                    "**AzDO*/**/*.yaml",
                 },
             },
         },
@@ -89,6 +94,26 @@ cmp.setup({
         { name = 'cmdline' }
       })
 })
+
+-- Autopairs
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local handlers = require('nvim-autopairs.completion.handlers')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done({
+        filetypes = {
+            ["*"] = {
+                ["("] = {
+                    kind = {
+                        cmp.lsp.CompletionItemKind.Function,
+                        cmp.lsp.CompletionItemKind.Method,
+                    },
+                    handler = handlers["*"]
+                }
+            },
+        }
+    })
+)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
