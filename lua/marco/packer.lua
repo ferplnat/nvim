@@ -43,6 +43,7 @@ return require('packer').startup(function(use)
 
     -- Completion
     use('hrsh7th/cmp-nvim-lsp')
+    use('hrsh7th/cmp-nvim-lua')
     use('hrsh7th/cmp-buffer')
     use('hrsh7th/cmp-path')
     use('hrsh7th/cmp-cmdline')
@@ -50,11 +51,21 @@ return require('packer').startup(function(use)
 
     -- AutoPairs
     use('windwp/nvim-autopairs')
+
     -- Surround
     use('kylechui/nvim-surround')
 
     -- LuaSnip
-    use('L3MON4D3/LuaSnip')
+    use({
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        tag = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+
+        -- install jsregexp.
+        run = "make install_jsregexp"
+    })
+
+    use("rafamadriz/friendly-snippets") -- Snippet library
     use('saadparwaiz1/cmp_luasnip')
 
     use('ThePrimeagen/vim-be-good')
