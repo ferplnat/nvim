@@ -1,4 +1,5 @@
-require("nvim-autopairs").setup {}
+local npairs = require("nvim-autopairs")
+npairs.setup({})
 
 -- Autopairs
 local cmp = require('cmp')
@@ -8,7 +9,6 @@ cmp.event:on(
     'confirm_done',
     cmp_autopairs.on_confirm_done({
         filetypes = {
-
             ["*"] = {
                 ["("] = {
                     kind = {
@@ -36,8 +36,8 @@ cmp.event:on(
                     handler = handlers["*"]
                 }
             },
-
         }
     })
 )
 
+npairs.get_rules(string.char(96))[1].not_filetypes = { "ps1", "psm1", "powershell" } -- 96 is ASCII backtick '`'

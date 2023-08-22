@@ -7,17 +7,15 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+    -- COLORS --
+    use ('loctvl842/monokai-pro.nvim')
+    use ('rebelot/kanagawa.nvim')
+    -- END COLORS --
+
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }
-    }
-
-    use {
-        "loctvl842/monokai-pro.nvim",
-        config = function()
-            require("monokai-pro").setup()
-        end
     }
 
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
@@ -39,7 +37,10 @@ return require('packer').startup(function(use)
     -- LSP Stuff
     use('williamboman/mason.nvim')
     use('williamboman/mason-lspconfig.nvim')
-    use('neovim/nvim-lspconfig')
+    use{
+        'neovim/nvim-lspconfig',
+        commit = '27c5947'
+    }
 
     -- Completion
     use('hrsh7th/cmp-nvim-lsp')
@@ -54,6 +55,9 @@ return require('packer').startup(function(use)
 
     -- Surround
     use('kylechui/nvim-surround')
+
+    -- Formatting
+    use('mhartington/formatter.nvim')
 
     -- LuaSnip
     use({
