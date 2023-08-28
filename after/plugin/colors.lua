@@ -22,7 +22,7 @@ function ColorMyPencils(color)
             keywordStyle = { italic = true},
             statementStyle = { bold = true },
             typeStyle = {},
-            transparent = false,         -- do not set background color
+            transparent = true,         -- do not set background color
             dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
             terminalColors = true,       -- define vim.g.terminal_color_{0,17}
             colors = {                   -- add/modify theme and palette colors
@@ -65,9 +65,16 @@ function ColorMyPencils(color)
                     Visual = { bg = "#6b5000" },
                     ColorColumn = { bg = "#6b5000" },
                     Cursor = { bg = "#fc9867", fg = "#fc9867" },
+
+                    -- Theme color overrides
+                    Todo = { bg = "none", fg = theme.syn.special1, underline = true, italic = true, bold = true }, -- TODO: Example
+                    ["@text.note"] = { link = "Todo" }, -- NOTE: Example
+                    ["@parameter"] = { italic = true },
+                    Operator = { fg = colors.palette.lightBlue },
+                    Boolean = { italic = true },
                 }
             end,
-            theme = "dragon",            -- Load "wave" theme when 'background' option is not set
+            theme = "wave",            -- Load "wave" theme when 'background' option is not set
             background = {               -- map the value of 'background' option to a theme
                 dark = "wave",           -- try "dragon" !
                 light = "lotus"

@@ -13,13 +13,13 @@ vim.keymap.set("n", "<leader>vv", "<C-v>", { desc = "Visual block mode (Windows 
 
 vim.keymap.set("n", "<leader>bp", ":bprevious<Return>", { desc = "[b]uffer [p]revious" })
 vim.keymap.set("n", "<leader>bn", ":bnext<Return>", { desc = "[b]uffer [n]ext" })
-vim.keymap.set("n", "<leader>tp", ":tabprevious<Return>", { desc = "[t]ab [p]revious" })
-vim.keymap.set("n", "<leader>tn", ":tabnext<Return>", { desc = "[t]ab [n]ext" })
 
 vim.keymap.set("v", "<", "<gv", { desc = "Maintain selection when indenting" })
 vim.keymap.set("v", ">", ">gv", { desc = "Maintain selection when indenting" })
 
 vim.keymap.set("n", "<leader>q", ":copen<Return>", { desc = "Open [q]uickfix list" })
 vim.keymap.set("n", "<leader>qe", ":cclose<Return>", { desc = "[q]uickfix list [e]xit" })
-vim.keymap.set("n", "<leader>n", ":cnext<Return>zz", { desc = "[n]ext item in quickfix list (Center viewport)" })
-vim.keymap.set("n", "<leader>p", ":cprev<Return>zz", { desc = "[p]revious item in quickfix list (Center viewport)" })
+vim.keymap.set("n", "<C-j>", ":cnext<Return>zz", { desc = "next item in quickfix list (Center viewport)" })
+vim.keymap.set("n", "<C-k>", ":cprev<Return>zz", { desc = "previous item in quickfix list (Center viewport)" })
+vim.keymap.set("n", "<C-h>", ":tabprevious<Return>", { desc = "tab previous" })
+vim.keymap.set("n", "<C-l>", ":tabnext<Return>", { desc = "tab next" })

@@ -12,6 +12,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+    -- MY PLUGINS!!!
+
+    'ferplnat/truefalse.nvim',
+
     -- COLORS --
     'loctvl842/monokai-pro.nvim',
     'rebelot/kanagawa.nvim',
