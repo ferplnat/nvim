@@ -1,10 +1,16 @@
 require('mason').setup()
-require('mason-lspconfig').setup({
-  ensure_installed = {
-    -- Things I always want installed
-    'powershell_es',
+
+ensure_installed = {
     'azure_pipelines_ls',
-  }
+    'lua_ls',
+}
+
+if jit.os == 'Windows' then
+    table.insert(ensure_installed, 'powershell_es')
+end
+
+require('mason-lspconfig').setup({
+  ensure_installed = ensure_installed
 })
 
 local lspconfig = require('lspconfig')

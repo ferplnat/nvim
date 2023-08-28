@@ -1,6 +1,7 @@
 require("marco.remap")
 require("marco.set")
 require("marco.statusline")
+require("marco.lazy")
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Fix startup error by disabling semantic tokens for omnisharp",
