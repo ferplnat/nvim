@@ -78,8 +78,8 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({
         ['<C-q>'] = cmp.mapping.select_prev_item(cmp_select),
         ['<C-e>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<Return>'] = cmp.mapping.confirm({ select = true }),
-        ["<C-Space>"] = cmp.mapping.complete(),
+        ['<Return>'] = cmp.mapping.confirm({ select = false }),
+        ["<C-s>"] = cmp.mapping.complete(),
         ['<Tab>'] = nil,
         ['<S-Tab>'] = nil,
     }),

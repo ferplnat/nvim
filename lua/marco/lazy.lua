@@ -31,6 +31,8 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter-context',
     'nvim-treesitter/playground',
 
+    { 'akinsho/toggleterm.nvim', version = "*" }, -- Terminal improvements
+
     'mbbill/undotree', -- UndoTree
     'tpope/vim-fugitive', -- Git
     'tpope/vim-vinegar', -- netrw improvements
