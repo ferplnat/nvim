@@ -2,22 +2,24 @@
 My nvim config
 
 # My binds
+## Leader
+`<Space>`
 
 ## General
 ### Normal Mode
-`<leader>pv` - Open netrw
+`<Leader>pv` - Open netrw
 
-`<leader>dd` - Delete line to "Black Hole" register
+`<Leader>dd` - Delete line to "Black Hole" register
 
-`<leader>vv` - Enter visual block mode
+`<Leader>vv` - Enter visual block mode
 
 `]b` - `:bnext` Next buffer
 
 `[b` - `:bprev` Previous buffer
 
-`<leader>q` - `:copen` Open quickfix list
+`<Leader>q` - `:copen` Open quickfix list
 
-`<leader>qe` - `:cclose` Close quickfix list
+`<Leader>qe` - `:cclose` Close quickfix list
 
 `]q` - `:cnext` Next item quickfix
 
@@ -32,31 +34,31 @@ My nvim config
 
 `K` - Move selection up (Indent aware)
 
-`<leader>p` - Paste over selection (Preserve register)
+`<Leader>p` - Paste over selection (Preserve register)
 
-`<leader>d` - Delete selection (Preserve register)
+`<Leader>d` - Delete selection (Preserve register)
 
 ## Harpoon
 ### Normal Mode
-`<C-h>` - Open Harpoon list
+`<Ctrl-h>` - Open Harpoon list
 
-`<C-m>` - Add item to Harpoon list
+`<Ctrl-m>` - Add item to Harpoon list
 
-`<C-j>` - Next Harpoon item
+`<Ctrl-j>` - Next Harpoon item
 
-`<C-k>` - Previous Harpoon item
+`<Ctrl-k>` - Previous Harpoon item
 
 ## Telescope
 ### Normal Mode
-`<leader>pf` - Find files (Plain search)
+`<Leader>pf` - Find files (Plain search)
 
-`<C-p>` - Find files (Git tree)
+`<Ctrl-p>` - Find files (Git tree)
 
-`<leader>ps` - Find files (Live grep)
+`<Leader>ps` - Find files (Live grep)
 
 ## UndoTree
 ### Normal Mode
-`<leader>u` - Open UndoTree
+`<Leader>u` - Open UndoTree
 
 ## LSP
 ### Normal Mode
@@ -64,32 +66,35 @@ My nvim config
 
 `K` - Show diagnostic
 
-`<leader>vws` - View symbol
+`<Leader>vws` - View symbol
 
-`<leader>vd` - View diagnostic float
+`<Leader>vd` - View diagnostic float
 
 `[d` - Next diagnostic
 
 `]d` - Previous diagnostic
 
-`<leader>vca` - View code actions
+`<Leader>vca` - View code actions
 
-`<leader>vrr` - View symbol references
+`<Leader>vrr` - View symbol references
 
-`<leader>vrn` - Rename symbol
+`<Leader>vrn` - Rename symbol
 
 ### Insert Mode
-`<C-h>` - View signature
+`<Ctrl-h>` - View signature
 
 ## Completion
-`['<Down>']` - Next item
+### Only when completion float is visible
+`<Down>` - Next item
 
-`['<Up>']` - Previous item
+`<Up>` - Previous item
 
-`['<Return>']` - Select item
+`<Return>` - Select item
 
-`["<C-s>"]` - Show completion options at cursor
+### Insert Mode
+`<Ctrl-s>` - Show completion options at cursor
 
-`["<Tab>"]` - (LuaSnip) Jump to next area. Does nothing if completion is visible.
+### Only when in a LuaSnip
+`<Tab>` - (LuaSnip) Jump to next area. Does nothing if completion is visible.
 
-`["<S-Tab>"]` - (LuaSnip) Jump to previous area. Does nothing if completion is visible.
+`<Shift-Tab>` - (LuaSnip) Jump to previous area. Does nothing if completion is visible.
