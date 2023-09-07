@@ -58,9 +58,22 @@ lspconfig.azure_pipelines_ls.setup({
 -- Completion
 
 local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local luasnip = require('luasnip')
 require("luasnip.loaders.from_vscode").lazy_load()
+
+local completion_kinds = require('cmp.types').lsp.CompletionItemKind
+local kind_index = 1
+local filter_source = function(entry)
+    return completion_kinds[entry:get_kind()] == completion_kinds[kind_index]
+end
+
+local insert_completion_sources = {
+    { name = 'nvim_lsp', group_index = 1 },
+    { name = 'luasnip', group_index = 1 },
+    { name = 'nvim_lua', group_index = 2 },
+    { name = 'buffer', group_index = 2 },
+}
 
 cmp.setup({
     snippet = {
@@ -80,10 +93,34 @@ cmp.setup({
         ['<Down>'] = cmp.mapping.select_next_item(cmp_select),
         ['<Return>'] = cmp.mapping.confirm({ select = false }),
         ["<C-s>"] = cmp.mapping.complete(),
+--        ["<C-n>"] = cmp.mapping(function(fallback)
+--            if not cmp.visible() then
+--                fallback()
+--            end
+--
+--            cmp.close()
+--            
+--            while not cmp.visible() do
+--                local filtered_sources = {}
+--                for _, source in pairs(insert_completion_sources) do
+--                    source['entry_filter'] = filter_source
+--                    table.insert(filtered_sources, source)
+--                end
+--
+--                cmp.complete({
+--                    sources = filtered_sources
+--                })
+--
+--                kind_index = kind_index + 1
+--                if kind_index > #completion_kinds then
+--                    kind_index = 1
+--                end
+--            end
+--        end, { "i", "s" }),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                return nil
+                fallback()
                 -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable() 
                 -- they way you will only jump inside the snippet region
             elseif luasnip.expand_or_jumpable() then
@@ -95,7 +132,7 @@ cmp.setup({
 
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                return nil
+                fallback()
             elseif luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
@@ -104,12 +141,7 @@ cmp.setup({
         end, { "i", "s" }),
     },
 
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'nvim_lua' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-    })
+    sources = insert_completion_sources
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).

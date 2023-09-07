@@ -13,15 +13,16 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Keep screen centered when half
 
 vim.keymap.set("n", "<leader>vv", "<C-v>", { desc = "Visual block mode (Windows Terminal <C-v> is paste)" })
 
-vim.keymap.set("n", "<leader>bp", ":bprevious<Return>", { desc = "[b]uffer [p]revious" })
-vim.keymap.set("n", "<leader>bn", ":bnext<Return>", { desc = "[b]uffer [n]ext" })
+vim.keymap.set("n", "]b", ":bnext<Return>", { desc = "[b]uffer [n]ext" })
+vim.keymap.set("n", "[b", ":bprevious<Return>", { desc = "[b]uffer [p]revious" })
 
 vim.keymap.set("v", "<", "<gv", { desc = "Maintain selection when indenting" })
 vim.keymap.set("v", ">", ">gv", { desc = "Maintain selection when indenting" })
 
 vim.keymap.set("n", "<leader>q", ":copen<Return>", { desc = "Open [q]uickfix list" })
 vim.keymap.set("n", "<leader>qe", ":cclose<Return>", { desc = "[q]uickfix list [e]xit" })
-vim.keymap.set("n", "<C-j>", ":cnext<Return>zz", { desc = "next item in quickfix list (Center viewport)" })
-vim.keymap.set("n", "<C-k>", ":cprev<Return>zz", { desc = "previous item in quickfix list (Center viewport)" })
-vim.keymap.set("n", "<C-h>", ":tabprevious<Return>", { desc = "tab previous" })
-vim.keymap.set("n", "<C-l>", ":tabnext<Return>", { desc = "tab next" })
+vim.keymap.set("n", "]q", ":cnext<Return>zz", { desc = "next item in quickfix list (Center viewport)" })
+vim.keymap.set("n", "[q", ":cprev<Return>zz", { desc = "previous item in quickfix list (Center viewport)" })
+
+vim.keymap.set("n", "]t", ":tabnext<Return>", { desc = "tab next" })
+vim.keymap.set("n", "[t", ":tabprevious<Return>", { desc = "tab previous" })
