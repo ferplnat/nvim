@@ -15,6 +15,8 @@ require('lazy').setup({
     -- MY PLUGINS!!!
     'ferplnat/truefalse.nvim',
 
+    { 'folke/neodev.nvim', version = "*" },
+
     -- COLORS --
     'loctvl842/monokai-pro.nvim',
     'rebelot/kanagawa.nvim',
@@ -25,11 +27,11 @@ require('lazy').setup({
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.2',
-        dependencies = { {'nvim-lua/plenary.nvim'} }
+        dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
 
     -- HARPOON
-    'ThePrimeagen/harpoon',
+    { 'ThePrimeagen/harpoon', dependencies = { { 'nvim-lua/plenary.nvim' } } },
 
     -- TREESITTER
     'nvim-treesitter/nvim-treesitter',
@@ -84,7 +86,7 @@ require('lazy').setup({
     {
         "L3MON4D3/LuaSnip",
         -- follow latest release.
-        tag = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        tag = "v2*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 
         -- install jsregexp.
         build = "make install_jsregexp",

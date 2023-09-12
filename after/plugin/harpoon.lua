@@ -23,10 +23,15 @@ require("harpoon").setup({
         tabline = false,
         tabline_prefix = "   ",
         tabline_suffix = "   ",
-    }
+    },
 })
 
-vim.keymap.set("n", "<C-m>", require("harpoon.mark").add_file, { desc = "[m]ark current file in harpoon" })
+local function file_added()
+    print(string.format("Harpoon'd \"%s\"", vim.fn.expand('%')))
+    require("harpoon.mark").add_file()
+end
+
+vim.keymap.set("n", "<C-m>", file_added, { desc = "[m]ark current file in harpoon" })
 vim.keymap.set("n", "<C-h>", require("harpoon.ui").toggle_quick_menu, { desc = "Toggle [h]arpoon" })
 vim.keymap.set("n", "<C-j>", require("harpoon.ui").nav_prev, { desc = "Previous item (harpoon)" })
 vim.keymap.set("n", "<C-k>", require("harpoon.ui").nav_next, { desc = "Next item (harpoon)" })

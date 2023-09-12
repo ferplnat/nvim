@@ -70,6 +70,10 @@ function ColorMyPencils(color)
                     TelescopePreviewNormal = { bg = theme.ui.bg_dim },
                     TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
 
+                    -- Harpoon
+                    HarpoonWindow = { fg = theme.ui.special, bg = theme.ui.bg_p1 },
+                    HarpoonBorder = { bg = theme.ui.bg_p1, bold = true },
+
                     -- Other overrides
                     Normal = { bg = "none" },
                     NormalFloat = { bg = "none" },
@@ -85,6 +89,12 @@ function ColorMyPencils(color)
                     Boolean = { italic = true },
                 }
             end,
+        })
+
+        require('harpoon').setup({
+            menu = {
+                borderchars = {" "}
+            }
         })
 
         vim.cmd.colorscheme(color)
