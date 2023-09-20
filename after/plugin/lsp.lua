@@ -40,6 +40,13 @@ lspconfig.powershell_es.setup({
         "ps1",
         "psm1",
     },
+    settings = {
+        powershell = {
+            codeFormatting = {
+                openBraceOnSameLine = true,
+            },
+        },
+    },
 })
 
 lspconfig.azure_pipelines_ls.setup({
@@ -99,7 +106,7 @@ cmp.setup({
             if cmp.visible() then
                 fallback()
             -- expand_or_locally_jumpable() is used to avoid errant jumps outside of luasnip regions
-            elseif luasnip.expand_or_locally_jumpable() then 
+            elseif luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
             else
                 fallback()
