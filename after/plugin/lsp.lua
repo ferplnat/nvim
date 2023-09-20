@@ -21,6 +21,9 @@ local my_onattach = function(client)
     -- client
 end
 
+-- neodev needs to be called before lspconfig
+require("neodev").setup({})
+
 for _, server_name in ipairs(get_servers()) do
   lspconfig[server_name].setup({
     capabilities = lsp_capabilities,
@@ -77,7 +80,6 @@ local insert_completion_sources = {
 
 cmp.setup({
     snippet = {
-        -- REQUIRED - you must specify a snippet engine
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
         end,
@@ -93,37 +95,11 @@ cmp.setup({
         ['<Down>'] = cmp.mapping.select_next_item(cmp_select),
         ['<Return>'] = cmp.mapping.confirm({ select = false }),
         ["<C-s>"] = cmp.mapping.complete(),
---        ["<C-n>"] = cmp.mapping(function(fallback)
---            if not cmp.visible() then
---                fallback()
---            end
---
---            cmp.close()
---            
---            while not cmp.visible() do
---                local filtered_sources = {}
---                for _, source in pairs(insert_completion_sources) do
---                    source['entry_filter'] = filter_source
---                    table.insert(filtered_sources, source)
---                end
---
---                cmp.complete({
---                    sources = filtered_sources
---                })
---
---                kind_index = kind_index + 1
---                if kind_index > #completion_kinds then
---                    kind_index = 1
---                end
---            end
---        end, { "i", "s" }),
-
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 fallback()
-                -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable() 
-                -- they way you will only jump inside the snippet region
-            elseif luasnip.expand_or_jumpable() then
+            -- expand_or_locally_jumpable() is used to avoid errant jumps outside of luasnip regions
+            elseif luasnip.expand_or_locally_jumpable() then 
                 luasnip.expand_or_jump()
             else
                 fallback()
