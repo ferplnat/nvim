@@ -44,6 +44,7 @@ lspconfig.powershell_es.setup({
         powershell = {
             codeFormatting = {
                 openBraceOnSameLine = true,
+                newLineAfterCloseBrace = true,
             },
         },
     },
@@ -64,6 +65,16 @@ lspconfig.azure_pipelines_ls.setup({
         },
     },
 })
+
+require('lspconfig').lua_ls.setup {
+  settings = {
+    Lua = {
+      workspace = {
+        checkThirdParty = false,
+      },
+    },
+  },
+}
 
 -- Completion
 
