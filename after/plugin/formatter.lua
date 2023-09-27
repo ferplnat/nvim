@@ -1,5 +1,5 @@
-local util = require "formatter.util"
-local defaults = require "formatter.defaults"
+local util = require('formatter.util')
+local defaults = require('formatter.defaults')
 
 -- NOTE: If using Windows, this requires WSL. All this does is run sed through WSL
 -- so you don't have to install extra binaries. I had to use Debian as a default

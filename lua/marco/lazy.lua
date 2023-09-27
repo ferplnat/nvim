@@ -1,13 +1,13 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -15,7 +15,7 @@ require('lazy').setup({
     -- MY PLUGINS!!!
     'ferplnat/truefalse.nvim',
 
-    { 'folke/neodev.nvim', version = "*" },
+    { 'folke/neodev.nvim',    version = "*" },
 
     -- COLORS --
     'loctvl842/monokai-pro.nvim',
@@ -23,6 +23,18 @@ require('lazy').setup({
     -- END COLORS --
 
     -- FILE/WORKSPACE MANAGEMENT STUFF --
+    -- COPILOT
+    {
+        'zbirenbaum/copilot-cmp',
+        dependencies = {
+            {
+                'zbirenbaum/copilot.lua',
+                version = '*',
+            }
+        },
+        version = '*',
+    },
+
     -- TELESCOPE
     {
         'nvim-telescope/telescope.nvim',
@@ -85,8 +97,7 @@ require('lazy').setup({
     -- LuaSnip
     {
         "L3MON4D3/LuaSnip",
-        -- follow latest release.
-        tag = "v2*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        version = "*",
 
         -- install jsregexp.
         build = "make install_jsregexp",

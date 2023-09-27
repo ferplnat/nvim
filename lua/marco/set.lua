@@ -18,6 +18,7 @@ vim.opt.incsearch = true
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+vim.opt.guicursor = "" -- Don't cursor for insert mode
 
 vim.g.mapleader = " "
 
