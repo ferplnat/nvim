@@ -12,7 +12,7 @@ local active_client_names = function()
         return "no active lsp"
     end
 
-    return string.format("active lsp: %s (%s)", table.concat(client_names, ', '), vim.bo.filetype)
+    return string.format("lsp: %s (%s)", table.concat(client_names, ', '), vim.bo.filetype)
 end
 
 function opts.render()

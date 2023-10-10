@@ -1,18 +1,57 @@
+local ensure_installed = {
+    'bash',
+    'bicep',
+    'c',
+    'cpp',
+    'css',
+    'csv',
+    'c_sharp',
+    'diff',
+    'dockerfile',
+    'gitcommit',
+    'gitignore',
+    'git_config',
+    'git_rebase',
+    'go',
+    'gomod',
+    'gosum',
+    'gowork',
+    'html',
+    'json',
+    'lua',
+    'luadoc',
+    'markdown',
+    'python',
+    'regex',
+    'sql',
+    'ssh_config',
+    'terraform',
+    'toml',
+    'tsv',
+    'vim',
+    'vimdoc',
+    'xml',
+    'yaml',
+}
+
 if jit.os == 'Windows' then
     local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-    parser_config.powershell = {
+    parser_config.PowerShell = {
       install_info = {
-        url = "https://github.com/jrsconfitto/tree-sitter-powershell",
-        files = {"src/parser.c"}
+        url = "~/nvim_parsers/tree-sitter-powershell",
+        branch = "operator001",
+        files = {"src/parser.c", "src/scanner.c"}
       },
       filetype = "ps1",
       used_by = { "psm1", "psd1", "pssc", "psxml", "cdxml" }
     }
+
+    table.insert(ensure_installed, 'PowerShell')
 end
 
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = "all",
+ensure_installed = ensure_installed,
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,

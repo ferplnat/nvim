@@ -84,18 +84,12 @@ local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local luasnip = require('luasnip')
 require("luasnip.loaders.from_vscode").lazy_load()
 
-local completion_kinds = require('cmp.types').lsp.CompletionItemKind
-local kind_index = 1
-local filter_source = function(entry)
-    return completion_kinds[entry:get_kind()] == completion_kinds[kind_index]
-end
-
 local insert_completion_sources = {
-    { name = 'nvim_lsp', group_index = 2, max_item_count = 5 },
-    { name = 'copilot',  group_index = 2, max_item_count = 3 },
-    { name = 'luasnip',  group_index = 2, max_item_count = 2 },
-    { name = 'nvim_lua', group_index = 3, max_item_count = 2 },
-    { name = 'buffer',   group_index = 3, max_item_count = 2 },
+    { name = 'nvim_lsp', group_index = 2 },
+    { name = 'copilot',  group_index = 2 },
+    { name = 'luasnip',  group_index = 2 },
+    { name = 'nvim_lua', group_index = 3 },
+    { name = 'buffer',   group_index = 3 },
 }
 
 cmp.setup({
@@ -148,7 +142,7 @@ cmp.setup({
 cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = 'buffer', max_item_count = 5 },
+        { name = 'buffer' },
     }
 })
 
@@ -157,8 +151,8 @@ cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources(
         {
-            { name = 'path',    group_index = 1, max_item_count = 2 },
-            { name = 'cmdline', group_index = 2, max_item_count = 2 },
+            { name = 'path',    group_index = 1 },
+            { name = 'cmdline', group_index = 2 },
         })
 })
 

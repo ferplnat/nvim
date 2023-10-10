@@ -27,7 +27,9 @@ require("harpoon").setup({
 })
 
 local function file_added()
-    print(string.format("Harpoon'd \"%s\"", vim.fn.expand('%')))
+    local message = string.format("Harpoon'd \"%s\"", vim.fn.expand('%'))
+    vim.api.nvim_echo({{ message, nil }}, false, {})
+
     require("harpoon.mark").add_file()
 end
 
