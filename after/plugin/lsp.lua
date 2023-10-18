@@ -32,7 +32,6 @@ for _, server_name in ipairs(get_servers()) do
 end
 
 -- LSP Server Specific Configs
-
 lspconfig.powershell_es.setup({
     capabilities = lsp_capabilities,
     shell = "powershell.exe", -- Make sure we're using Windows PowerShell 5.1
@@ -66,7 +65,7 @@ lspconfig.azure_pipelines_ls.setup({
     },
 })
 
-require('lspconfig').lua_ls.setup {
+lspconfig.lua_ls.setup {
     settings = {
         Lua = {
             workspace = {

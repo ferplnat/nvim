@@ -24,7 +24,6 @@ require('formatter').setup({
     logging = true,
     filetype = {
         ["*"] = {
-            remove_trailing_whitespace,
             function()
                 vim.lsp.buf.format({ async = false })
             end

@@ -91,12 +91,6 @@ function ColorMyPencils(color)
             end,
         })
 
-        require('harpoon').setup({
-            menu = {
-                borderchars = {" "}
-            }
-        })
-
         vim.cmd.colorscheme(color)
     end
 end

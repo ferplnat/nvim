@@ -8,6 +8,8 @@ local function find_fallback()
     end
 end
 
+require('plenary.filetype').add_file('ps1')
+
 vim.keymap.set('n', '<C-p>', find_fallback, {})
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<leader>pb', builtin.buffers, {})

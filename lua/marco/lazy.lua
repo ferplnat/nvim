@@ -52,7 +52,7 @@ require('lazy').setup({
     'nvim-treesitter/playground',
 
     -- BETTER TERMINAL EXPERIENCE
-    { 'akinsho/toggleterm.nvim', version = "*" },
+    { 'akinsho/toggleterm.nvim',     version = "*" },
 
     -- UNDOTREE
     'mbbill/undotree',

@@ -34,7 +34,7 @@ local ensure_installed = {
     'yaml',
 }
 
-if jit.os == 'Windows' then
+if jit.os == 'Windows' and vim.fn.isdirectory(vim.fn.expand('~/nvim_parsers/tree-sitter-powershell')) == 1 then
     local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
     parser_config.PowerShell = {
       install_info = {
@@ -43,9 +43,9 @@ if jit.os == 'Windows' then
         files = {"src/parser.c", "src/scanner.c"}
       },
       filetype = "ps1",
-      used_by = { "psm1", "psd1", "pssc", "psxml", "cdxml" }
     }
 
+    vim.treesitter.language.register('PowerShell', 'psm1')
     table.insert(ensure_installed, 'PowerShell')
 end
 
