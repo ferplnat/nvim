@@ -43,6 +43,11 @@ require('lazy').setup({
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
 
+    {
+        'nvim-telescope/telescope-ui-select.nvim',
+        dependencies = { { 'nvim-telescope/telescope.nvim' } }
+    },
+
     -- HARPOON
     { 'ThePrimeagen/harpoon', dependencies = { { 'nvim-lua/plenary.nvim' } } },
 

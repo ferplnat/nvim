@@ -8,6 +8,14 @@ local function find_fallback()
     end
 end
 
+require('telescope').setup({
+    extensions = {
+        ["ui-select"] = {
+            require("telescope.themes").get_cursor(),
+        },
+    },
+})
+
 require('plenary.filetype').add_file('ps1')
 
 vim.keymap.set('n', '<C-p>', find_fallback, {})
@@ -19,3 +27,5 @@ vim.api.nvim_create_user_command('TGBranches', builtin.git_branches, {})
 vim.api.nvim_create_user_command('TGCommits', builtin.git_commits, {})
 vim.api.nvim_create_user_command('TGStatus', builtin.git_status, {})
 vim.api.nvim_create_user_command('TGStash', builtin.git_stash, {})
+
+require("telescope").load_extension("ui-select")

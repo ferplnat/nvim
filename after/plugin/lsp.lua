@@ -2,11 +2,15 @@ require('mason').setup()
 
 local ensure_installed = {
     'azure_pipelines_ls',
+    'bashls',
+    'clangd',
+    'gopls',
     'lua_ls',
 }
 
 if jit.os == 'Windows' then
     table.insert(ensure_installed, 'powershell_es')
+    table.insert(ensure_installed, 'omnisharp')
 end
 
 require('mason-lspconfig').setup({
@@ -14,7 +18,7 @@ require('mason-lspconfig').setup({
 })
 
 local lspconfig = require('lspconfig')
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local get_servers = require('mason-lspconfig').get_installed_servers
 
 local my_onattach = function(client)
@@ -65,6 +69,18 @@ lspconfig.azure_pipelines_ls.setup({
     },
 })
 
+lspconfig.gopls.setup({
+    capabilities = lsp_capabilities,
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+        },
+    },
+})
+
 lspconfig.lua_ls.setup {
     settings = {
         Lua = {
@@ -76,7 +92,6 @@ lspconfig.lua_ls.setup {
 }
 
 -- Completion
-
 require('copilot_cmp').setup() -- Integrate copilot with cmp
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -160,11 +175,8 @@ cmp.setup.cmdline(':', {
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
     callback = function(event)
-        -- Enable completion triggered by <c-x><c-o>
         vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-        -- Buffer local mappings.
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end,
             { buffer = event.buf, desc = "[g]o to [d]efinition" })
 
