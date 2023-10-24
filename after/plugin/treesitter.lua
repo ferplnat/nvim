@@ -34,7 +34,7 @@ local ensure_installed = {
     'yaml',
 }
 
-if jit.os == 'Windows' and vim.fn.isdirectory(vim.fn.expand('~/nvim_parsers/tree-sitter-powershell')) then
+if jit.os == 'Windows' and vim.fn.isdirectory(vim.fn.expand('~/nvim_parsers/tree-sitter-powershell')) == 1 then
     local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
     parser_config.PowerShell = {
       install_info = {

@@ -70,9 +70,6 @@ require('lazy').setup({
     -- END FILE/WORKSPACE MANAGEMENT STUFF --
 
     -- UTILITIES/QUALITY OF LIFE IMPROVEMENTS --
-    -- NO NECK PAIN
-    { 'shortcuts/no-neck-pain.nvim', version = "*" },
-
     -- Diff Visual Selection (LineDiff)
     'AndrewRadev/linediff.vim',
 
