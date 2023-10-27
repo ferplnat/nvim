@@ -42,6 +42,7 @@ function ColorMyPencils(color)
             },
             overrides = function(colors) -- add/modify highlights
                 local theme = colors.theme
+
                 return {
                     -- Popup menu
                     Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },  -- add `blend = vim.o.pumblend` to enable transparency
@@ -51,6 +52,13 @@ function ColorMyPencils(color)
 
                     FloatBorder = { bg = "none" },
                     FloatTitle = { bg = "none" },
+
+                    -- Diagnostics
+                    DiagnosticError = { fg = theme.diag.error, bg = theme.ui.bg_p1 },
+                    DiagnosticFloatingWarn = { fg = theme.diag.warning, bg = theme.ui.bg_p1 },
+                    DiagnosticFloatingInfo = { fg = theme.diag.info, bg = theme.ui.bg_p1 },
+                    DiagnosticFloatingHint = { fg = theme.diag.hint, bg = theme.ui.bg_p1 },
+                    DiagnosticFloatingOk = { fg = theme.diag.ok, bg = theme.ui.bg_p1 },
 
                     -- Save an hlgroup with dark background and dimmed foreground
                     -- so that you can use it where your still want darker windows.
@@ -76,7 +84,7 @@ function ColorMyPencils(color)
 
                     -- Other overrides
                     Normal = { bg = "none" },
-                    NormalFloat = { bg = "none" },
+                    NormalFloat = { bg = theme.ui.bg_p1 },
                     Visual = { bg = "#6b5000" },
                     ColorColumn = { bg = "#6b5000" },
                     Cursor = { bg = "#fc9867", fg = "#fc9867" },

@@ -1,4 +1,0 @@
-*my-environment.txt*
-Notes for reference to my environment:
-
-

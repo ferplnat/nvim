@@ -18,7 +18,11 @@ local active_client_names = function()
     if #client_names == 0 then
         lspMessage = "no active lsp"
     else
-        lspMessage = string.format("lsp: %s (%s)", table.concat(client_names, ', '), vim.bo.filetype)
+        lspMessage = string.format("lsp: %s", table.concat(client_names, ', '))
+    end
+
+    if vim.bo.filetype ~= "" then
+        lspMessage = string.format("%s (%s)", lspMessage, vim.bo.filetype)
     end
 
     if copilotActive then

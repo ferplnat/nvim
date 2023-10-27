@@ -16,7 +16,10 @@ require('lazy').setup({
     'ferplnat/truefalse.nvim',
 
     -- NEOVIM API STUFF --
-    { 'folke/neodev.nvim',    version = "*" },
+    {
+        'folke/neodev.nvim',
+        version = "*",
+    },
 
     -- COLORS --
     'loctvl842/monokai-pro.nvim',
@@ -40,16 +43,30 @@ require('lazy').setup({
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.2',
-        dependencies = { { 'nvim-lua/plenary.nvim' } }
+        dependencies = {
+            {
+                'nvim-lua/plenary.nvim'
+            },
+        },
     },
 
     {
         'nvim-telescope/telescope-ui-select.nvim',
-        dependencies = { { 'nvim-telescope/telescope.nvim' } }
+        dependencies = {
+            {
+                'nvim-telescope/telescope.nvim'
+            },
+        },
     },
 
     -- HARPOON
-    { 'ThePrimeagen/harpoon', dependencies = { { 'nvim-lua/plenary.nvim' } } },
+    { 'ThePrimeagen/harpoon',
+        dependencies = {
+            {
+                'nvim-lua/plenary.nvim'
+            },
+        },
+    },
 
     -- TREESITTER
     'nvim-treesitter/nvim-treesitter',
@@ -57,7 +74,10 @@ require('lazy').setup({
     'nvim-treesitter/playground',
 
     -- BETTER TERMINAL EXPERIENCE
-    { 'akinsho/toggleterm.nvim',     version = "*" },
+    {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+    },
 
     -- UNDOTREE
     'mbbill/undotree',
@@ -69,12 +89,28 @@ require('lazy').setup({
     'tpope/vim-vinegar',
     -- END FILE/WORKSPACE MANAGEMENT STUFF --
 
+    -- NOTE TAKING --
+    {
+        'nvim-neorg/neorg',
+        run = ':Neorg sync-parsers',
+        version = '*',
+        dependencies = {
+            {
+                'nvim-treesitter/nvim-treesitter',
+            },
+        },
+    },
+    -- END NOTE TAKING --
+
     -- UTILITIES/QUALITY OF LIFE IMPROVEMENTS --
     -- Diff Visual Selection (LineDiff)
     'AndrewRadev/linediff.vim',
 
     -- INDENT GUIDES --
-    { 'lukas-reineke/indent-blankline.nvim', version = "*" },
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        version = "*",
+    },
 
     -- AutoPairs
     'windwp/nvim-autopairs',
@@ -94,6 +130,9 @@ require('lazy').setup({
         'neovim/nvim-lspconfig',
         commit = '27c5947'
     },
+
+    -- Fixes for Omnisharp
+    "Hoffs/omnisharp-extended-lsp.nvim",
 
     -- Completion
     'hrsh7th/cmp-nvim-lsp',
