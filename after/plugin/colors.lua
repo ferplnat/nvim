@@ -54,7 +54,7 @@ function ColorMyPencils(color)
                     FloatTitle = { bg = "none" },
 
                     -- Diagnostics
-                    DiagnosticError = { fg = theme.diag.error, bg = theme.ui.bg_p1 },
+                    DiagnosticFloatingError = { fg = theme.diag.error, bg = theme.ui.bg_p1 },
                     DiagnosticFloatingWarn = { fg = theme.diag.warning, bg = theme.ui.bg_p1 },
                     DiagnosticFloatingInfo = { fg = theme.diag.info, bg = theme.ui.bg_p1 },
                     DiagnosticFloatingHint = { fg = theme.diag.hint, bg = theme.ui.bg_p1 },
@@ -77,6 +77,10 @@ function ColorMyPencils(color)
                     TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
                     TelescopePreviewNormal = { bg = theme.ui.bg_dim },
                     TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+
+                    -- ToggleTerm
+                    ToggleTermNormal = { bg = theme.ui.bg_p1 },
+                    ToggleTermStatusLine = { link = "StatusLine" },
 
                     -- Harpoon
                     HarpoonWindow = { fg = theme.ui.special, bg = theme.ui.bg_p1 },

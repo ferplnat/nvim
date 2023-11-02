@@ -13,23 +13,17 @@ if jit.os == 'Windows' then
     table.insert(ensure_installed, 'omnisharp@v1.39.8')
 end
 
-require('mason-lspconfig').setup({
-    ensure_installed = ensure_installed
-})
-
 -- neodev needs to be called before lspconfig
 require("neodev").setup({})
 
-local lspconfig = require('lspconfig')
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local my_onattach = function(client)
     -- client
 end
-local get_servers = require('mason-lspconfig').get_installed_servers
 
-require('mason-lspconfig').setup_handlers({
+local handlers = {
     function(server_name)
-        lspconfig[server_name].setup({
+        require('lspconfig')[server_name].setup({
             capabilities = lsp_capabilities,
             on_attach = my_onattach,
         })
@@ -37,7 +31,7 @@ require('mason-lspconfig').setup_handlers({
 
     ["powershell_es"] = function()
         -- LSP Server Specific Configs
-        lspconfig.powershell_es.setup({
+        require('lspconfig').powershell_es.setup({
             capabilities = lsp_capabilities,
             shell = "powershell.exe", -- Make sure we're using Windows PowerShell 5.1
             filetypes = {
@@ -56,7 +50,7 @@ require('mason-lspconfig').setup_handlers({
     end,
 
     ["omnisharp"] = function()
-        lspconfig.omnisharp.setup({
+        require('lspconfig').omnisharp.setup({
             capabilities = lsp_capabilities,
             handlers = {
                 ["textDocument/definition"] = require('omnisharp_extended').handler,
@@ -79,17 +73,23 @@ require('mason-lspconfig').setup_handlers({
         })
     end,
 
+    ["yamlls"] = function()
+        require('lspconfig').yamlls.setup({
+            capabilities = lsp_capabilities,
+        })
+    end,
+
     ["azure_pipelines_ls"] = function()
-        lspconfig.azure_pipelines_ls.setup({
+        require('lspconfig').azure_pipelines_ls.setup({
             capabilities = lsp_capabilities,
             settings = {
                 yaml = {
                     schemas = {
                         ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
-                            "**Azure*/**/*.yaml",
-                            "**Azure*/**/*.yml",
-                            "**AzDO*/**/*.yml",
-                            "**AzDO*/**/*.yaml",
+                            "**Azure**.yaml",
+                            "**Azure**.yml",
+                            "**AzDO**.yml",
+                            "**AzDO**.yaml",
                         },
                     },
                 },
@@ -98,7 +98,7 @@ require('mason-lspconfig').setup_handlers({
     end,
 
     ["gopls"] = function()
-        lspconfig.gopls.setup({
+        require('lspconfig').gopls.setup({
             capabilities = lsp_capabilities,
             settings = {
                 gopls = {
@@ -112,7 +112,7 @@ require('mason-lspconfig').setup_handlers({
     end,
 
     ["lua_ls"] = function()
-        lspconfig.lua_ls.setup {
+        require('lspconfig').lua_ls.setup {
             settings = {
                 Lua = {
                     workspace = {
@@ -122,6 +122,11 @@ require('mason-lspconfig').setup_handlers({
             },
         }
     end,
+}
+
+require('mason-lspconfig').setup({
+    ensure_installed = ensure_installed,
+    handlers = handlers,
 })
 
 -- Use LspAttach autocommand to only map the following keys

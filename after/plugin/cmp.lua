@@ -5,11 +5,12 @@ local luasnip = require('luasnip')
 require("luasnip.loaders.from_vscode").lazy_load()
 
 local insert_completion_sources = {
-    { name = 'nvim_lsp', group_index = 2, priority = 1 },
-    { name = 'copilot',  group_index = 2, priority = 2 },
-    { name = 'luasnip',  group_index = 2, priority = 2 },
-    { name = 'nvim_lua', group_index = 3, priority = 2 },
-    { name = 'buffer',   group_index = 3, priority = 2 },
+    { name = 'nvim_lsp_signature_help', group_index = 2 },
+    { name = 'nvim_lsp',                group_index = 2, priority = 1 },
+    { name = 'copilot',                 group_index = 2, priority = 2 },
+    { name = 'luasnip',                 group_index = 2, priority = 2 },
+    { name = 'nvim_lua',                group_index = 3, priority = 2 },
+    { name = 'buffer',                  group_index = 3, priority = 2 },
 }
 
 cmp.setup({

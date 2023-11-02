@@ -26,17 +26,41 @@ vim.opt.pumheight = 10
 
 vim.g.mapleader = " "
 
+local cursor_center_exclude_filetypes = {
+    'toggleterm',
+    'telescope',
+    'netrw'
+}
+
 if jit.os == 'Windows' then
     local powershell_options = {
-      shell = "powershell",
-      shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
-      shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
-      shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
-      shellquote = "",
-      shellxquote = "",
+        shell = "powershell",
+        shellcmdflag =
+        "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+        shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
+        shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+        shellquote = "",
+        shellxquote = "",
     }
 
     for option, value in pairs(powershell_options) do
-      vim.opt[option] = value
+        vim.opt[option] = value
     end
 end
+
+local auto_command_group = vim.api.nvim_create_augroup('marco-autocmd', {})
+
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+    group = auto_command_group,
+    callback = function()
+        for _, x in pairs(cursor_center_exclude_filetypes) do
+            if vim.bo.filetype == x then
+                return
+            end
+        end
+
+        local curpos = vim.fn.getpos('.')
+        vim.cmd([[silent! normal! zz]])
+        vim.fn.setpos('.', curpos)
+    end,
+})

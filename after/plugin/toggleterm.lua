@@ -4,6 +4,17 @@ require('toggleterm').setup({
     hide_numbers = false,
     direction = 'horizontal',
     size = 30,
+    shade_terminals = false,
+
+    highlights = {
+        Normal = {
+            link = 'ToggleTermNormal',
+        },
+
+        StatusLine = {
+            link = 'ToggleTermStatusLine',
+        },
+    },
 
     on_open = function(term)
         vim.cmd('startinsert!')

@@ -6,6 +6,7 @@ local ensure_installed = {
     'css',
     'csv',
     'c_sharp',
+    'comment', -- TODO: and NOTE: FIXME: etc
     'diff',
     'dockerfile',
     'gitcommit',
@@ -60,7 +61,7 @@ ensure_installed = ensure_installed,
   },
 
   indent = {
-      enable = true,
-      disable = {"python"}
+      enable = false,
+      -- disable = {"python"}
   },
 }

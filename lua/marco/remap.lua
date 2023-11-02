@@ -8,9 +8,6 @@ vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste over selection without
 vim.keymap.set("n", "<leader>dd", "\"_dd", { desc = "Delete line without losing buffer" })
 vim.keymap.set("x", "<leader>d", "\"_d", { desc = "Delete selection without losing buffer" })
 
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Keep screen centered when half-page jumping" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Keep screen centered when half-page jumping" })
-
 vim.keymap.set("n", "<leader>vv", "<C-v>", { desc = "Visual block mode (Windows Terminal <C-v> is paste)" })
 
 vim.keymap.set("n", "]b", ":bnext<Return>", { desc = "[b]uffer [n]ext" })

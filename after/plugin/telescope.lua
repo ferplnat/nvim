@@ -1,4 +1,5 @@
 local builtin = require('telescope.builtin')
+local themes = require('telescope.themes')
 
 local function find_fallback()
     if pcall(builtin.git_files) then
@@ -11,14 +12,23 @@ end
 require('telescope').setup({
     extensions = {
         ["ui-select"] = {
-            require("telescope.themes").get_cursor(),
+            themes.get_cursor(),
         },
+    },
+
+    pickers = {
+--        builtin = {
+--            theme = "cursor",
+--            previewer = false,
+--        },
     },
 })
 
 require('plenary.filetype').add_file('ps1')
 
 vim.keymap.set('n', '<C-p>', find_fallback, {})
+vim.keymap.set('n', '<leader>t', builtin.builtin, {})
+vim.keymap.set('n', '<leader>pt', builtin.treesitter, {})
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<leader>pb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>ps', builtin.live_grep, {})
