@@ -1,20 +1,22 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Go to netrw (root dir)" })
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted selection (J) (Indent-aware)" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted selection (K) (Indent-aware)" })
+vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted selection (J) (Indent-aware)" })
+vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted selection (K) (Indent-aware)" })
 
-vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste over selection without losing buffer" })
-vim.keymap.set("n", "<leader>dd", "\"_dd", { desc = "Delete line without losing buffer" })
-vim.keymap.set("x", "<leader>d", "\"_d", { desc = "Delete selection without losing buffer" })
+vim.keymap.set("x", "<leader>sy", "\"+y", { desc = "Copy selection to system clipboard" })
+vim.keymap.set("n", "<leader>syy", "\"+yy", { desc = "Copy line to system clipboard" })
+vim.keymap.set({ "x", "n" }, "<leader>sp", "\"+p", { desc = "Paste selection from system clipboard" })
 
-vim.keymap.set("n", "<leader>vv", "<C-v>", { desc = "Visual block mode (Windows Terminal <C-v> is paste)" })
+vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste over selection without losing default register" })
+vim.keymap.set("n", "<leader>dd", "\"_dd", { desc = "Delete line without losing default register" })
+vim.keymap.set("x", "<leader>d", "\"_d", { desc = "Delete selection without losing default register" })
 
 vim.keymap.set("n", "]b", ":bnext<Return>", { desc = "[b]uffer [n]ext" })
 vim.keymap.set("n", "[b", ":bprevious<Return>", { desc = "[b]uffer [p]revious" })
 
-vim.keymap.set("v", "<", "<gv", { desc = "Maintain selection when indenting" })
-vim.keymap.set("v", ">", ">gv", { desc = "Maintain selection when indenting" })
+vim.keymap.set("x", "<", "<gv", { desc = "Maintain selection when indenting" })
+vim.keymap.set("x", ">", ">gv", { desc = "Maintain selection when indenting" })
 
 vim.keymap.set("n", "<leader>q", ":copen<Return>", { desc = "Open [q]uickfix list" })
 vim.keymap.set("n", "<leader>qe", ":cclose<Return>", { desc = "[q]uickfix list [e]xit" })
