@@ -1,10 +1,18 @@
 require('copilot').setup({
     panel = {
-        enabled = false,
+        enabled = true,
     },
 
     suggestion = {
-        enabled = false,
+        enabled = true,
+        auto_trigger = true,
+        debounce = 75,
+        keymap = {
+            accept = "<C-d>",
+            next = "<C-.>",
+            prev = "<C-,>",
+            dismiss = "<C-y>",
+        },
     },
 
     filetypes = {
@@ -18,6 +26,9 @@ require('copilot').setup({
         cvs = false,
         ["."] = false,
     },
+
     copilot_node_command = 'node', -- Node.js version must be > 16.x
     server_opts_overrides = {},
 })
+
+vim.keymap.set("n", "<leader>cp", require('copilot.panel').open, { desc = "Open [c]opilot [p]anel." })

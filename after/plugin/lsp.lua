@@ -99,21 +99,7 @@ local handlers = {
             handlers = {
                 ["textDocument/definition"] = require('omnisharp_extended').handler,
             },
-            settings = {
-                csharp = {
-                    enableInlayHintsForImplicitObjectCreation = true,
-                    enableInlayHintsForImplicitVariableTypes = true,
-                    enableInlayHintsForLambdaParameterTypes = true,
-                    enableInlayHintsForTypes = true,
-                },
-
-                omnisharp = {
-                    enableAsyncCompletion = true,
-                    enableDecompilationSupport = true,
-                    enableEditorConfigSupport = true,
-                    organizeImportsOnFormat = true,
-                },
-            },
+            settings = require('marco.lspconfigs.omnisharp').settings,
         })
     end,
 
@@ -140,6 +126,13 @@ local handlers = {
                     },
                 },
             },
+        })
+    end,
+
+    ["bicep"] = function()
+        require('lspconfig').bicep.setup({
+            capabilities = lsp_capabilities,
+            on_attach = my_onattach,
         })
     end,
 

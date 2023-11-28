@@ -24,18 +24,13 @@ require('lazy').setup({
     -- COLORS --
     'loctvl842/monokai-pro.nvim',
     'rebelot/kanagawa.nvim',
+    'cpea2506/one_monokai.nvim',
     -- END COLORS --
 
     -- FILE/WORKSPACE MANAGEMENT STUFF --
     -- COPILOT
     {
-        'zbirenbaum/copilot-cmp',
-        dependencies = {
-            {
-                'zbirenbaum/copilot.lua',
-                version = '*',
-            }
-        },
+        'zbirenbaum/copilot.lua',
         version = '*',
     },
 
@@ -60,7 +55,8 @@ require('lazy').setup({
     },
 
     -- HARPOON
-    { 'ThePrimeagen/harpoon',
+    {
+        'ThePrimeagen/harpoon',
         dependencies = {
             {
                 'nvim-lua/plenary.nvim'
@@ -133,6 +129,8 @@ require('lazy').setup({
 
     -- Fixes for Omnisharp
     "Hoffs/omnisharp-extended-lsp.nvim",
+    -- C# Language Server (Beta)
+    -- 'jmederosalvarado/roslyn.nvim',
 
     -- Completion
     'hrsh7th/cmp-nvim-lsp',

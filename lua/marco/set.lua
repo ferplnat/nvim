@@ -25,6 +25,7 @@ vim.opt.cursorcolumn = true
 vim.opt.pumheight = 10
 
 vim.g.mapleader = " "
+vim.o.mouse = nil
 
 local cursor_center_exclude_filetypes = {
     'toggleterm',

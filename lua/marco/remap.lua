@@ -1,3 +1,25 @@
+local command_keep_cursor_position = function(cmd)
+    return function()
+        local save_cursor = vim.fn.getcurpos()
+        vim.cmd(cmd)
+        vim.fn.setpos(".", save_cursor)
+    end
+end
+
+local command_with_count = function(cmd, mode, keep_cursor_position)
+    return function()
+        mode = mode or ""
+        cmd = mode .. vim.v.count1 .. cmd
+        keep_cursor_position = keep_cursor_position or false
+
+        if keep_cursor_position then
+            command_keep_cursor_position(cmd)()
+        else
+            vim.cmd(cmd)
+        end
+    end
+end
+
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Go to netrw (root dir)" })
 
@@ -23,5 +45,10 @@ vim.keymap.set("n", "<leader>qe", ":cclose<Return>", { desc = "[q]uickfix list [
 vim.keymap.set("n", "]q", ":cnext<Return>zz", { desc = "next item in quickfix list (Center viewport)" })
 vim.keymap.set("n", "[q", ":cprev<Return>zz", { desc = "previous item in quickfix list (Center viewport)" })
 
-vim.keymap.set("n", "]t", ":tabnext<Return>", { desc = "tab next" })
-vim.keymap.set("n", "[t", ":tabprevious<Return>", { desc = "tab previous" })
+vim.keymap.set("n", "]t", command_with_count("tabnext"), { desc = "tab next" })
+vim.keymap.set("n", "[t", command_with_count("tabprevious"), { desc = "tab previous" })
+
+vim.keymap.set("n", "]o", command_with_count("o", "normal!", false), { desc = "Insert new line below" })
+vim.keymap.set("n", "[o", command_with_count("O", "normal!", false), { desc = "Insert new line above" })
+vim.keymap.set("n", "]O", command_with_count("o", "normal!", true), { desc = "Insert new line below, keep cursor position" })
+vim.keymap.set("n", "[O", command_with_count("O", "normal!", true), { desc = "Insert new line above, keep cursor position" })

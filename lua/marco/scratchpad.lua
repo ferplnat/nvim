@@ -9,7 +9,7 @@ end
 local create_scratch_win = function()
     local current_win = vim.api.nvim_get_current_win()
 
-    vim.cmd(string.format("silent! topleft %dvsp %s", scratch_width(), scratch_file))
+    vim.cmd(string.format("silent! topleft %dvsp +Explore %s", scratch_width(), scratch_file))
     state.hidden = false
     state.scratch_win = vim.api.nvim_get_current_win()
     vim.o.wrap = true
