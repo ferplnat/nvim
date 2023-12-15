@@ -1,1 +1,3 @@
 /plugin/
+# Sorry, this is ignored because the config is work specific.
+/after/plugin/dotherightthing.lua

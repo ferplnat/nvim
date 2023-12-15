@@ -1,17 +1,18 @@
 local command_keep_cursor_position = function(cmd)
+    local save_cursor = vim.fn.getcurpos()
+
     return function()
-        local save_cursor = vim.fn.getcurpos()
         vim.cmd(cmd)
         vim.fn.setpos(".", save_cursor)
     end
 end
 
 local command_with_count = function(cmd, mode, keep_cursor_position)
-    return function()
-        mode = mode or ""
-        cmd = mode .. vim.v.count1 .. cmd
-        keep_cursor_position = keep_cursor_position or false
+    mode = mode or ""
+    cmd = mode .. vim.v.count1 .. cmd
+    keep_cursor_position = keep_cursor_position or false
 
+    return function()
         if keep_cursor_position then
             command_keep_cursor_position(cmd)()
         else

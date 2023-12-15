@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
     -- MY PLUGINS!!!
     'ferplnat/truefalse.nvim',
+    'ferplnat/dotherightthing.nvim',
 
     -- NEOVIM API STUFF --
     {
@@ -24,7 +25,7 @@ require('lazy').setup({
     -- COLORS --
     'loctvl842/monokai-pro.nvim',
     'rebelot/kanagawa.nvim',
-    'cpea2506/one_monokai.nvim',
+    'folke/tokyonight.nvim',
     -- END COLORS --
 
     -- FILE/WORKSPACE MANAGEMENT STUFF --

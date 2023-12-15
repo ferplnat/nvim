@@ -62,6 +62,7 @@ end
 local auto_command_group = vim.api.nvim_create_augroup("marco-scratchpad", {})
 
 vim.api.nvim_create_autocmd({ "VimEnter", "TabNewEntered" }, {
+    group = auto_command_group,
     callback = create_scratch_win,
 })
 

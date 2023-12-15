@@ -84,8 +84,16 @@ local handlers = {
             settings = {
                 powershell = {
                     codeFormatting = {
+                        alignPropertyValuePairs = true,
+                        addWhitespaceAroundPipe = true,
+                        avoidSemicolonsAsLineTerminators = true,
                         openBraceOnSameLine = true,
                         newLineAfterCloseBrace = true,
+                        useCorrectCasing = true,
+                        useConstantStrings = true,
+                    },
+                    scriptAnalysis = {
+                        enable = true,
                     },
                 },
             },
