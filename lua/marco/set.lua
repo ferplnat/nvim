@@ -27,6 +27,8 @@ vim.opt.pumheight = 10
 vim.g.mapleader = " "
 vim.o.mouse = nil
 
+vim.opt.termguicolors = true
+
 local cursor_center_exclude_filetypes = {
     'toggleterm',
     'telescope',
@@ -64,4 +66,10 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
         vim.cmd([[silent! normal! zz]])
         vim.fn.setpos('.', curpos)
     end,
+})
+
+vim.filetype.add({
+    extension = {
+        ['azcli'] = 'azcli',
+    }
 })

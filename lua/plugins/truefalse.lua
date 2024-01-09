@@ -1,0 +1,3 @@
+return {
+    'ferplnat/truefalse.nvim',
+}

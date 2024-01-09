@@ -1,0 +1,5 @@
+return {
+    extension = {
+        ['azcli'] = 'azcli',
+    }
+}

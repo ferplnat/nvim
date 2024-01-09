@@ -25,37 +25,46 @@ M.apply = function()
         dim_inactive = false,             -- dims inactive windows
         lualine_bold = false,             -- When `true`, section headers in the lualine theme will be bold
 
-        on_colors = function(colors) end,
-
         on_highlights = function(hl, c)
-            local prompt = "#2d3149"
+            local accent = "#2d3149"
 
             hl.TelescopeNormal = {
                 bg = c.bg_dark,
                 fg = c.fg_dark,
             }
+
             hl.TelescopeBorder = {
-                bg = c.bg_dark,
-                fg = c.bg_dark,
+                bg = accent,
+                fg = accent,
             }
+
             hl.TelescopePromptNormal = {
-                bg = prompt,
+                bg = accent,
             }
+
             hl.TelescopePromptBorder = {
-                bg = prompt,
-                fg = prompt,
+                bg = accent,
+                fg = accent,
             }
+
             hl.TelescopePromptTitle = {
-                bg = prompt,
-                fg = prompt,
+                bg = c.bg_search,
+                fg = c.fg_dark,
             }
+
             hl.TelescopePreviewTitle = {
-                bg = c.bg_dark,
-                fg = c.bg_dark,
+                bg = c.bg_search,
+                fg = c.fg_dark,
             }
+
             hl.TelescopeResultsTitle = {
-                bg = c.bg_dark,
-                fg = c.bg_dark,
+                bg = c.bg_search,
+                fg = c.fg_dark,
+            }
+
+            hl.TelescopeTitle = {
+                bg = c.bg_search,
+                fg = c.fg_dark,
             }
 
             hl.Boolean = {
@@ -79,9 +88,7 @@ M.apply = function()
 
             -- ToggleTerm
             hl.ToggleTermNormal = { bg = c.bg_dark }
-
             hl.ToggleTermStatusLine = { link = "StatusLine" }
-
         end,
     })
     vim.cmd.colorscheme('tokyonight')

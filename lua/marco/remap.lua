@@ -51,5 +51,7 @@ vim.keymap.set("n", "[t", command_with_count("tabprevious"), { desc = "tab previ
 
 vim.keymap.set("n", "]o", command_with_count("o", "normal!", false), { desc = "Insert new line below" })
 vim.keymap.set("n", "[o", command_with_count("O", "normal!", false), { desc = "Insert new line above" })
-vim.keymap.set("n", "]O", command_with_count("o", "normal!", true), { desc = "Insert new line below, keep cursor position" })
-vim.keymap.set("n", "[O", command_with_count("O", "normal!", true), { desc = "Insert new line above, keep cursor position" })
+vim.keymap.set("n", "]O", command_with_count("o", "normal!", true),
+    { desc = "Insert new line below, keep cursor position" })
+vim.keymap.set("n", "[O", command_with_count("O", "normal!", true),
+    { desc = "Insert new line above, keep cursor position" })
