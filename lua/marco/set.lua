@@ -73,3 +73,15 @@ vim.filetype.add({
         ['azcli'] = 'azcli',
     }
 })
+
+local delete_hidden_buffers = function()
+    local buffers = vim.fn.getbufinfo()
+
+    for _, buffer in pairs(buffers) do
+        if buffer.hidden == 1 then
+            vim.api.nvim_buf_delete(buffer.bufnr, { force = true })
+        end
+    end
+end
+
+vim.api.nvim_create_user_command('BCleanup', delete_hidden_buffers, { desc = 'Delete all hidden buffers' })

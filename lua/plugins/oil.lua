@@ -7,12 +7,15 @@ return {
         vim.api.nvim_create_autocmd({ "FileType" }, {
             group = group,
             pattern = "oil",
-            callback = function()
-                vim.keymap.set("n", "cd", function()
-                local message = string.format("cwd is now \"%s\"", vim.fn.expand('%'))
-                vim.api.nvim_echo({ { message, nil } }, false, {})
-                    require('oil.actions').cd.callback()
-                end, { desc = "Change cwd to current location" })
+            callback = function(ev)
+                vim.api.nvim_buf_set_keymap(ev.buf, "n", "cd", "", {
+                    callback = function()
+                        local message = string.format("cwd is now \"%s\"", vim.fn.expand('%'))
+                        vim.api.nvim_echo({ { message, nil } }, false, {})
+                        require('oil.actions').cd.callback()
+                    end,
+                    desc = "Change cwd to current location"
+                })
             end,
         })
 
