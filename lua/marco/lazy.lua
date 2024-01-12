@@ -28,5 +28,10 @@ require('lazy').setup(
             frequency = 3600,
             check_pinned = false,
         },
+
+        profiling = {
+            loader = false,
+            require = false,
+        },
     }
 )

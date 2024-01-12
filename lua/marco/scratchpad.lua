@@ -8,8 +8,12 @@ end
 
 local create_scratch_win = function()
     local current_win = vim.api.nvim_get_current_win()
+    local escaped_file = vim.fn.escape(scratch_file, ' \\')
 
-    vim.cmd(string.format("silent! topleft %dvsp +Explore %s", scratch_width(), scratch_file))
+    local cmd = string.format(":silent! topleft %dvsp", scratch_width())
+    local cmd2 = string.format("Oil %s", escaped_file)
+    vim.cmd(cmd)
+    vim.cmd(cmd2)
     state.hidden = false
     state.scratch_win = vim.api.nvim_get_current_win()
     vim.o.wrap = true
@@ -61,7 +65,13 @@ end
 
 local auto_command_group = vim.api.nvim_create_augroup("marco-scratchpad", {})
 
-vim.api.nvim_create_autocmd({ "VimEnter", "TabNewEntered" }, {
+vim.api.nvim_create_autocmd({ "User" }, {
+    pattern = "VeryLazy",
+    group = auto_command_group,
+    callback = create_scratch_win,
+})
+
+vim.api.nvim_create_autocmd({ "TabNewEntered" }, {
     group = auto_command_group,
     callback = create_scratch_win,
 })

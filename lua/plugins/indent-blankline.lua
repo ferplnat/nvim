@@ -3,6 +3,10 @@ return {
     version = "*",
 
     config = function()
-        require('ibl').setup({})
+        require('ibl').setup({
+            scope = {
+                enabled = true,
+            },
+        })
     end,
 }

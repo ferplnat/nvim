@@ -4,6 +4,7 @@ return {
     config = function()
         vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
         local group = vim.api.nvim_create_augroup("marco_oil", {})
+
         vim.api.nvim_create_autocmd({ "FileType" }, {
             group = group,
             pattern = "oil",
@@ -21,6 +22,9 @@ return {
 
         require('oil').setup({
             default_file_explorer = true,
+            keymaps = {
+                ["<C-p>"] = false,
+            }
         })
     end,
 }
