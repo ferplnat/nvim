@@ -1,3 +1,5 @@
+--- @type LazyPluginSpec
 return {
-    'ferplnat/truefalse.nvim',
+    name = 'truefalse',
+    [1] = 'ferplnat/truefalse.nvim',
 }

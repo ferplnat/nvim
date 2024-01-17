@@ -1,18 +1,16 @@
+--- @type LazyPluginSpec
 return {
-    'mhartington/formatter.nvim',
+    name = 'formatter',
+    [1] = 'mhartington/formatter.nvim',
 
     config = function()
         local function remove_trailing_whitespace()
             -- Save cursor position
-            local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+            local curpos = vim.fn.getpos('.')
 
             vim.cmd([[silent! :keeppatterns %s/[ \t]\+$//ge]])
             -- Restore cursor position
-            local lastline = vim.fn.line("$")
-            if line > lastline then
-                line = lastline
-            end
-            vim.api.nvim_win_set_cursor(0, { line, col })
+            vim.fn.setpos('.', curpos)
         end
 
         local format_on_save_filetypes = {

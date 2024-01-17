@@ -1,9 +1,10 @@
+--- @type LazyPluginSpec
 return {
-    'nvim-treesitter/nvim-treesitter',
+    name = 'treesitter',
+    [1] = 'nvim-treesitter/nvim-treesitter',
 
     dependencies = {
         'nvim-treesitter/nvim-treesitter-context',
-        'nvim-treesitter/playground',
     },
 
     config = function()

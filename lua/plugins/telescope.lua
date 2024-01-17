@@ -1,11 +1,12 @@
+--- @type LazyPluginSpec
 return {
-    'nvim-telescope/telescope.nvim',
+    name = 'telescope',
+    [1] = 'nvim-telescope/telescope.nvim',
     version = "*",
     dependencies = {
         {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-ui-select.nvim',
-            'jonarrien/telescope-cmdline.nvim',
         },
     },
 
@@ -50,7 +51,6 @@ return {
             },
         })
 
-        require("telescope").load_extension("cmdline")
         require("telescope").load_extension("ui-select")
         require('plenary.filetype').add_file('ps1')
 
@@ -60,8 +60,6 @@ return {
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
         vim.keymap.set('n', '<leader>pb', builtin.buffers, {})
         vim.keymap.set('n', '<leader>ps', builtin.live_grep, {})
-        vim.api.nvim_set_keymap('n', '<leader><leader>', ':silent Telescope cmdline<CR>',
-            { noremap = true, desc = "Telescope cmdline" })
 
         vim.api.nvim_create_user_command('TGBranches', builtin.git_branches, {})
         vim.api.nvim_create_user_command('TGCommits', builtin.git_commits, {})

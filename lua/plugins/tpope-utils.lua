@@ -1,3 +1,5 @@
+--- @type LazyPluginSpec
 return {
-    'tpope/vim-repeat',
+    name = 'repeat',
+    [1] = 'tpope/vim-repeat',
 }

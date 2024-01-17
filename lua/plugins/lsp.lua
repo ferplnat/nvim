@@ -1,6 +1,7 @@
+--- @type LazyPluginSpec
 return {
-    -- LSP Stuff
-    'neovim/nvim-lspconfig',
+    name = 'lsp',
+    [1] = 'neovim/nvim-lspconfig',
 
     dependencies = {
         'williamboman/mason.nvim',

@@ -1,5 +1,7 @@
+--- @type LazyPluginSpec
 return {
-    'akinsho/toggleterm.nvim',
+    name = 'toggleterm',
+    [1] = 'akinsho/toggleterm.nvim',
     version = "*",
 
     config = function()

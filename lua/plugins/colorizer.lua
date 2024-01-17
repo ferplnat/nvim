@@ -1,5 +1,7 @@
+--- @type LazyPluginSpec
 return {
-    'norcalli/nvim-colorizer.lua',
+    name = 'colorizer',
+    [1] = 'norcalli/nvim-colorizer.lua',
 
     config = function()
         require('colorizer').setup(

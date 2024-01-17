@@ -1,11 +1,12 @@
+--- @type LazyPluginSpec
 return {
-    'kylechui/nvim-surround',
+    name = 'surround',
+    [1] = 'kylechui/nvim-surround',
 
     config = function()
         local surround = require('nvim-surround')
 
         surround.setup({
-            -- Config goes here
         })
     end,
 }

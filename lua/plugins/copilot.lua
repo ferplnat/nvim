@@ -1,5 +1,7 @@
+--- @type LazyPluginSpec
 return {
-    'zbirenbaum/copilot.lua',
+    name = 'copilot',
+    [1] = 'zbirenbaum/copilot.lua',
     version = '*',
     config = function()
         require('copilot').setup({
@@ -32,7 +34,7 @@ return {
             },
 
             copilot_node_command = 'node', -- Node.js version must be > 16.x
-    server_opts_overrides = {},
+            server_opts_overrides = {},
         })
 
         vim.keymap.set("n", "<leader>cp", require('copilot.panel').open, { desc = "Open [c]opilot [p]anel." })

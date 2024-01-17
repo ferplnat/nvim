@@ -1,6 +1,7 @@
--- END UTILITIES/QUALITY OF LIFE IMPROVEMENTS --
+--- @type LazyPluginSpec
 return {
-    'nvimtools/none-ls.nvim',
+    name = 'none-ls',
+    [1] = 'nvimtools/none-ls.nvim',
     dependencies = {
         {
             'nvim-lua/plenary.nvim'

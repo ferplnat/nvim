@@ -1,5 +1,7 @@
+--- @type LazyPluginSpec
 return {
-    "L3MON4D3/LuaSnip",
+    name = 'luasnip',
+    [1] = 'L3MON4D3/LuaSnip',
     version = "*",
 
     dependencies = {

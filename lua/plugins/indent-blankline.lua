@@ -1,5 +1,7 @@
+--- @type LazyPluginSpec
 return {
-    'lukas-reineke/indent-blankline.nvim',
+    name = 'indent-blankline',
+    [1] = 'lukas-reineke/indent-blankline.nvim',
     version = "*",
 
     config = function()
