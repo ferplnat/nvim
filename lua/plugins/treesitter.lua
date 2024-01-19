@@ -5,7 +5,10 @@ return {
 
     dependencies = {
         'nvim-treesitter/nvim-treesitter-context',
+        'nvim-treesitter/nvim-treesitter-textobjects',
     },
+
+    build = ":TSUpdate",
 
     config = function()
         local ensure_installed = {
@@ -60,10 +63,15 @@ return {
             table.insert(ensure_installed, 'PowerShell')
         end
 
-        require('nvim-treesitter.configs').setup {
+        local remaps = require('marco.remaps.treesitter-textobjects')
+        remaps.apply()
+
+        require('nvim-treesitter.configs').setup({
             ensure_installed = ensure_installed,
             sync_install = false,
             auto_install = true,
+            modules = {},
+            ignore_install = {},
 
             highlight = {
                 enable = true,
@@ -74,6 +82,27 @@ return {
                 enable = false,
                 -- disable = {"python"}
             },
-        }
+            textobjects = {
+                select = {
+                    enable = true,
+                    -- Automatically jump forward to textobj, similar to targets.vim
+                    lookahead = true,
+                    keymaps = remaps.select,
+                },
+                swap = {
+                    enable = true,
+                    swap_next = remaps.swap.swap_next,
+                    swap_previous = remaps.swap.swap_previous,
+                },
+                move = {
+                    enable = true,
+                    set_jumps = true, -- whether to set jumps in the jumplist
+                    goto_next_start = remaps.move.goto_next_start,
+                    goto_next_end = remaps.move.goto_next_end,
+                    goto_previous_start = remaps.move.goto_previous_start,
+                    goto_previous_end = remaps.move.goto_previous_end,
+                },
+            },
+        })
     end,
 }

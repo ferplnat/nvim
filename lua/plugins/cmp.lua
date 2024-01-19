@@ -14,8 +14,8 @@ return {
 
     config = function()
         local cmp = require('cmp')
-        local cmp_select = { behavior = cmp.SelectBehavior.Select }
         local luasnip = require('luasnip')
+        local remaps = require('marco.remaps.cmp')
         require("luasnip.loaders.from_vscode").lazy_load()
 
         local insert_completion_sources = {
@@ -41,34 +41,7 @@ return {
 
             preselect = cmp.PreselectMode.None,
 
-            mapping = {
-                ['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
-                ['<Down>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<Return>'] = cmp.mapping.confirm({ select = false }),
-                ['<C-s>'] = cmp.mapping.complete(),
-                ['<C-j>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-k>'] = cmp.mapping.scroll_docs(4),
-                ['<Tab>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        fallback()
-                        -- expand_or_locally_jumpable() is used to avoid errant jumps outside of luasnip regions
-                    elseif luasnip.expand_or_locally_jumpable() then
-                        luasnip.expand_or_jump()
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
-
-                ['<S-Tab>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        fallback()
-                    elseif luasnip.jumpable(-1) then
-                        luasnip.jump(-1)
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
-            },
+            mapping = remaps.mappings,
 
             sources = insert_completion_sources
         })

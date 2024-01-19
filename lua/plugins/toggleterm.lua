@@ -5,8 +5,9 @@ return {
     version = "*",
 
     config = function()
+        local remaps = require('marco.remaps.toggleterm')
         require('toggleterm').setup({
-            open_mapping = '<C-\\>',
+            open_mapping = remaps.open_mapping,
             insert_mappings = false,
             hide_numbers = false,
             direction = 'horizontal',
@@ -25,8 +26,7 @@ return {
 
             on_open = function(term)
                 vim.cmd('startinsert!')
-                vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<C-n>", "<cmd>stopinsert!<Return>",
-                    { noremap = true, silent = true })
+                remaps.on_open(term)
             end,
         })
     end,

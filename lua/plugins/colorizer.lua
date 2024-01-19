@@ -7,6 +7,10 @@ return {
         require('colorizer').setup(
             {
                 '*',
+                '!vim',
+                '!lazy',
+                '!oil',
+                '!noice',
             },
             {
                 names = false,

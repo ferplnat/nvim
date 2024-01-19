@@ -50,6 +50,7 @@ return {
                 enabled = true,
                 backend = 'cmp',
             },
+            status = require('noice.config.status').defaults,
         })
     end,
 }

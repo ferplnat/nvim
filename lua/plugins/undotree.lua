@@ -14,6 +14,7 @@ return {
 
         vim.g.undotree_UndoDir = undotree_dir
         vim.cmd('UndotreePersistUndo')
-        vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+        require('marco.remaps.undotree').apply()
     end,
 }

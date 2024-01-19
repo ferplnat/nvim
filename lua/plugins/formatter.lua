@@ -4,15 +4,6 @@ return {
     [1] = 'mhartington/formatter.nvim',
 
     config = function()
-        local function remove_trailing_whitespace()
-            -- Save cursor position
-            local curpos = vim.fn.getpos('.')
-
-            vim.cmd([[silent! :keeppatterns %s/[ \t]\+$//ge]])
-            -- Restore cursor position
-            vim.fn.setpos('.', curpos)
-        end
-
         local format_on_save_filetypes = {
             'go',
             'cs',
@@ -44,17 +35,14 @@ return {
             }
         })
 
-        vim.keymap.set("n", "g=", function()
-            remove_trailing_whitespace()
-            vim.cmd([[silent! :noautocmd FormatWrite]])
-        end, { desc = "Format current buffer." })
+        require('marco.remaps.formatter').apply()
 
         local auto_command_group = vim.api.nvim_create_augroup("marco-formatter", {})
 
         vim.api.nvim_create_autocmd("BufWritePost", {
             group = auto_command_group,
             callback = function()
-                remove_trailing_whitespace()
+                require('marco.utils').remove_trailing_whitespace()
 
                 if vim.tbl_contains(format_on_save_filetypes, vim.bo.filetype) then
                     vim.cmd([[silent! :noautocmd FormatWrite]])

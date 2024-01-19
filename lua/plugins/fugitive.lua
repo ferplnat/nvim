@@ -4,6 +4,6 @@ return {
     [1] = 'tpope/vim-fugitive',
 
     config = function()
-        vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Open ':Git' command line" })
+        require('marco.remaps.fugitive').apply()
     end,
 }
