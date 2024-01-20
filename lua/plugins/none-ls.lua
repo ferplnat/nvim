@@ -2,10 +2,9 @@
 return {
     name = 'none-ls',
     [1] = 'nvimtools/none-ls.nvim',
+
     dependencies = {
-        {
-            'nvim-lua/plenary.nvim'
-        },
+        'nvim-lua/plenary.nvim'
     },
 
     config = function()
@@ -20,7 +19,7 @@ return {
                     extra_args = { "--dialect", "transact-sql" },
                 }),
                 builtins.diagnostics.yamllint,
-            }
+            },
         })
     end,
 }

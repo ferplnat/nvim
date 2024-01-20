@@ -1,8 +1,7 @@
 local M = {}
 
 M.on_open = function(term)
-    vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<C-n>", "<cmd>stopinsert!<Return>",
-        { noremap = true, silent = true })
+    vim.keymap.set("t", "<C-n>", vim.cmd.stopinsert, { noremap = true, silent = true, buffer = term.bufnr })
 end
 
 -- Open toggleterm
