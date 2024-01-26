@@ -1,7 +1,7 @@
-vim.opt.nu = true
+vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.smartindent = false
 vim.opt.autoindent = true
+vim.opt.smartindent = false
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -25,14 +25,19 @@ vim.opt.cursorcolumn = true
 vim.opt.pumheight = 10
 
 vim.g.mapleader = " "
-vim.o.mouse = nil
+vim.o.mouse = '' -- Disable mouse support
 
 vim.opt.termguicolors = true
 
+local utils = require('marco.utils')
+
 local cursor_center_exclude_filetypes = {
-    'toggleterm',
+    'lazy',
+    'netrw',
+    'oil',
     'telescope',
-    'netrw'
+    'TelescopePrompt',
+    'toggleterm',
 }
 
 if jit.os == 'Windows' then
@@ -51,20 +56,27 @@ if jit.os == 'Windows' then
     end
 end
 
+-- Keep cursor centered at all times
 local auto_command_group = vim.api.nvim_create_augroup('marco-autocmd', {})
-
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     group = auto_command_group,
     callback = function()
-        for _, x in pairs(cursor_center_exclude_filetypes) do
-            if vim.bo.filetype == x then
-                return
-            end
+        if vim.fn.mode() == 'c' then
+            return
         end
 
-        local curpos = vim.fn.getpos('.')
-        vim.cmd([[silent! normal! zz]])
-        vim.fn.setpos('.', curpos)
+        if vim.list_contains(cursor_center_exclude_filetypes, vim.bo.filetype) then
+            return
+        end
+
+        local win_info = vim.api.nvim_win_get_config(0)
+        if vim.fn.empty(win_info.relative) == 0 or win_info.external then
+            return
+        end
+
+        utils.execute_keep_cursor(function()
+            vim.cmd([[silent! normal! zz]])
+        end)
     end,
 })
 
@@ -76,10 +88,13 @@ vim.filetype.add({
 
 local delete_hidden_buffers = function()
     local buffers = vim.fn.getbufinfo()
+    if buffers == nil then
+        return
+    end
 
     for _, buffer in pairs(buffers) do
         if buffer.hidden == 1 then
-            vim.api.nvim_buf_delete(buffer.bufnr, { force = true })
+            vim.api.nvim_buf_delete(buffer.bufnr, { force = false })
         end
     end
 end

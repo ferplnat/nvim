@@ -28,29 +28,36 @@ return {
                 },
 
                 ["*"] = {
+                    require('marco.utils').remove_trailing_whitespace,
                     function()
                         vim.lsp.buf.format({ async = false })
                     end,
                 },
-            }
+            },
         })
 
         require('marco.remaps.formatter').apply()
 
         local auto_command_group = vim.api.nvim_create_augroup("marco-formatter", {})
 
-        vim.api.nvim_create_autocmd("BufWritePost", {
+        vim.api.nvim_create_autocmd("BufWritePre", {
             group = auto_command_group,
-            callback = function()
-                require('marco.utils').remove_trailing_whitespace()
-
-                if vim.tbl_contains(format_on_save_filetypes, vim.bo.filetype) then
-                    vim.cmd([[silent! :noautocmd FormatWrite]])
+            callback = function(ev)
+                if vim.bo[ev.buf].modified == false then
                     return
                 end
 
-                vim.cmd([[silent! :noautocmd write]])
-            end
+                if vim.tbl_contains(format_on_save_filetypes, vim.bo.filetype) then
+                    vim.cmd([[silent! Format]])
+                end
+            end,
+        })
+
+        vim.api.nvim_create_autocmd("BufWritePost", {
+            group = auto_command_group,
+            callback = function(ev)
+                vim.diagnostic.show(nil, ev.buf)
+            end,
         })
     end,
 }

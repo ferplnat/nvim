@@ -1,9 +1,10 @@
-local command_keep_cursor_position = function(cmd)
-    local save_cursor = vim.fn.getcurpos()
+local utils = require('marco.utils')
 
+local command_keep_cursor_position = function(cmd)
     return function()
-        vim.cmd(cmd)
-        vim.fn.setpos(".", save_cursor)
+        utils.execute_keep_cursor(function()
+            vim.cmd(cmd)
+        end)
     end
 end
 

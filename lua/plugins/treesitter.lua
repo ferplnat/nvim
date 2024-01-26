@@ -63,7 +63,7 @@ return {
             table.insert(ensure_installed, 'PowerShell')
         end
 
-        local remaps = require('marco.remaps.treesitter-textobjects')
+        local remaps = require('marco.remaps.treesitter')
         remaps.apply()
 
         require('nvim-treesitter.configs').setup({
@@ -78,10 +78,16 @@ return {
                 additional_vim_regex_highlighting = false,
             },
 
+            incremental_selection = {
+                enable = true,
+                keymaps = remaps.incremental_selection,
+            },
+
             indent = {
                 enable = false,
                 -- disable = {"python"}
             },
+
             textobjects = {
                 select = {
                     enable = true,

@@ -1,3 +1,4 @@
 /plugin/
+/lua/plugin-dev/
 # Sorry, this is ignored because the config is work specific.
 /lua/plugins/dotherightthing.lua

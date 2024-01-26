@@ -86,6 +86,11 @@ M.apply = function()
                 fg = c.error,
             }
 
+            hl.StatusLineMode = {
+                fg = '#fc9867',
+                bg = hl.StatusLine.bg,
+            }
+
             -- ToggleTerm
             hl.ToggleTermNormal = { bg = c.bg_dark }
             hl.ToggleTermStatusLine = { link = "StatusLine" }
