@@ -1,0 +1,5 @@
+return {
+    extension = {
+        ['bicep'] = 'bicep',
+    }
+}

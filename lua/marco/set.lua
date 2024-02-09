@@ -17,17 +17,26 @@ vim.opt.incsearch = true
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "80"
-vim.opt.guicursor = "" -- Don't cursor for insert mode
+vim.opt.colorcolumn = '80'
+vim.opt.guicursor = '' -- Don't cursor for insert mode
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 
 vim.opt.pumheight = 10
 
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 vim.o.mouse = '' -- Disable mouse support
 
 vim.opt.termguicolors = true
+
+vim.o.cmdheight = 3
+
+-- Relative line numbers with a different color for specified intervals
+local interval = 5
+vim.api.nvim_set_hl(0, 'LineNrAlt', { fg = '#fc9867' })
+vim.o.stc = '%#LineNrAlt#%{&rnu&&(v:relnum==0)?"".v:lnum:""}%=' ..
+    '%#LineNr#%{&rnu&&(v:relnum%' .. interval .. '&&v:relnum!=0)?"".v:relnum:""}' ..
+    '%#LineNrAlt#%{&rnu&&!(v:relnum%' .. interval .. '||v:relnum==0)?"".v:relnum:""} '
 
 local utils = require('marco.utils')
 
@@ -42,13 +51,13 @@ local cursor_center_exclude_filetypes = {
 
 if jit.os == 'Windows' then
     local powershell_options = {
-        shell = "powershell",
+        shell = 'powershell',
         shellcmdflag =
-        "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
-        shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
-        shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
-        shellquote = "",
-        shellxquote = "",
+        '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;',
+        shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait',
+        shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode',
+        shellquote = '',
+        shellxquote = '',
     }
 
     for option, value in pairs(powershell_options) do
@@ -58,25 +67,30 @@ end
 
 -- Keep cursor centered at all times
 local auto_command_group = vim.api.nvim_create_augroup('marco-autocmd', {})
-vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
     group = auto_command_group,
     callback = function()
-        if vim.fn.mode() == 'c' then
-            return
-        end
-
         if vim.list_contains(cursor_center_exclude_filetypes, vim.bo.filetype) then
             return
         end
 
         local win_info = vim.api.nvim_win_get_config(0)
-        if vim.fn.empty(win_info.relative) == 0 or win_info.external then
+        if win_info.relative ~= '' or win_info.external then
             return
         end
 
         utils.execute_keep_cursor(function()
             vim.cmd([[silent! normal! zz]])
         end)
+    end,
+})
+
+-- Set gitcommit filetype preferences
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+    group = auto_command_group,
+    pattern = 'gitcommit',
+    callback = function(ev)
+        vim.bo[ev.buf].textwidth = 72
     end,
 })
 

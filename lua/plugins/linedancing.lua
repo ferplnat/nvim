@@ -2,7 +2,11 @@
 return {
     name = 'linedancing',
     [1] = 'ferplnat/linedancing.nvim',
-    branch = 'more_async',
+
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+    },
+
     config = function()
         require('linedancing').setup({
             components = {
@@ -12,7 +16,7 @@ return {
                         return '%f %h%m%r'
                     end,
                     highlight = '',
-                    event = { 'BufEnter', 'BufLeave' },
+                    event = { 'BufEnter', 'BufLeave', 'BufModifiedSet' },
                     user_event = { 'LazyDone' },
                     position = 'left',
                     eval = true,
@@ -24,13 +28,13 @@ return {
                         return '%{FugitiveStatusline()}'
                     end,
                     highlight = '',
-                    event = { 'BufReadPost', 'BufNewFile' },
+                    event = { 'BufEnter', 'BufReadPost', 'BufNewFile' },
                     position = 'left',
                     eval = true,
                 },
 
                 {
-                    name = 'lsp',
+                    name = 'buf_info',
                     callback = function(event)
                         local client_names = {}
                         local active_clients = vim.lsp.get_clients({ bufnr = event.buf or vim.api.nvim_get_current_buf() })
@@ -49,13 +53,13 @@ return {
 
                         if null_ls_active then
                             for _, source in pairs(require('null-ls.sources').get_available(vim.bo.filetype)) do
-                                client_names[#client_names + 1] = source.name .. '*n-ls'
+                                client_names[#client_names + 1] = source.name .. '*'
                             end
                         end
 
                         local lspMessage
                         if #client_names == 0 then
-                            lspMessage = "no active lsp"
+                            lspMessage = "no lsp"
                         else
                             lspMessage = string.format("lsp: %s", table.concat(client_names, ', '))
                         end
@@ -68,11 +72,15 @@ return {
                             lspMessage = lspMessage .. " {copilot}"
                         end
 
+                        if pcall(function() vim.treesitter.get_parser():lang() end) then
+                            lspMessage = lspMessage .. " [TS]"
+                        end
+
                         return " | " .. lspMessage
                     end,
 
                     highlight = '',
-                    event = { 'LspAttach', 'LspDetach', 'LspRequest' },
+                    event = { 'LspAttach', 'LspDetach', 'LspRequest', 'BufEnter', 'BufLeave', 'WinEnter', 'WinLeave' },
                     position = 'left',
                     eval = false,
                 },

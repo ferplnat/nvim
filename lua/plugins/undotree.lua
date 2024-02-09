@@ -12,8 +12,8 @@ return {
             vim.fn.mkdir(undotree_dir, 'p')
         end
 
+        vim.o.undofile = true
         vim.g.undotree_UndoDir = undotree_dir
-        vim.cmd('UndotreePersistUndo')
 
         require('marco.remaps.undotree').apply()
     end,

@@ -15,10 +15,10 @@ end
 
 M.select = {
     -- You can use the capture groups defined in textobjects.scm
-    ["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment [textobj]" },
-    ["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment [textobj]" },
-    ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment [textobj]" },
-    ["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment [textobj]" },
+    ["ae"] = { query = "@assignment.outer", desc = "Select outer part of an assignment [textobj]" },
+    ["ie"] = { query = "@assignment.inner", desc = "Select inner part of an assignment [textobj]" },
+    ["iE"] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment [textobj]" },
+    ["aE"] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment [textobj]" },
 
     ["aa"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument [textobj]" },
     ["ia"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument [textobj]" },
