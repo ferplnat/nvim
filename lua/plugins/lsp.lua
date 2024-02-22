@@ -39,9 +39,38 @@ return {
             remaps.on_attach(bufnr)
 
             vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
             if client.name == "omnisharp" then
-                client.server_capabilities.semanticTokensProvider = nil
+                client.server_capabilities.semanticTokensProvider = false
             end
+        end
+
+        if vim.fn.isdirectory(vim.fn.expand('~/nvim-lsp/fastbuild-vscode')) == 1 then
+            vim.filetype.add({
+                extension = {
+                    ['bff'] = 'fastbuild',
+                }
+            })
+
+            require('lspconfig.configs').fastbuild_vscode = {
+                default_config = {
+                    cmd = { 'node', vim.fn.expand('~/nvim-lsp/fastbuild-vscode/server/out/server.js'), '--stdio' },
+                    filetypes = { 'fastbuild' },
+                    root_dir = function(fname)
+                        return require('lspconfig.util').root_pattern('fbuild.bff')(fname) or vim.fn.getcwd()
+                    end,
+                    settings = {
+                        fastbuild = {
+                            logPerformanceMetrics = false,
+                            inputDebounceDelay = 500,
+                        },
+                    },
+                },
+            }
+
+            require('lspconfig').fastbuild_vscode.setup({
+                on_attach = my_onattach,
+            })
         end
 
         local handlers = {
@@ -84,12 +113,20 @@ return {
             ["omnisharp"] = function()
                 vim.fn.setenv("OMNISHARPHOME", vim.fn.stdpath('config') .. '/lspconfigs/omnisharp/')
 
+                local omnisharp_cmd
+                if jit.os == 'Windows' then
+                    omnisharp_cmd = { vim.fn.stdpath('data') .. '/mason/packages/omnisharp/libexec/omnisharp.exe' }
+                end
+
                 require('lspconfig').omnisharp.setup({
+                    cmd = omnisharp_cmd,
                     capabilities = lsp_capabilities,
                     on_attach = my_onattach,
                     handlers = {
                         ["textDocument/definition"] = require('omnisharp_extended').handler,
                     },
+                    root_dir = require('lspconfig').util.root_pattern('*.sln', '*.csproj', 'omnisharp.json',
+                        'function.json'),
 
                     -- Disable all so that omnisharp.json is used
                     enable_editorconfig_support = false,

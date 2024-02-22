@@ -21,10 +21,10 @@ M.on_attach = function(bufnr)
     vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float(diagnostic_float) end,
         { buffer = bufnr, desc = "[v]iew [d]iagnostic float" })
 
-    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next(diagnostic_goto_prefs) end,
+    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next(diagnostic_goto_prefs) end,
         { buffer = bufnr, desc = "next [d]iagnostic" })
 
-    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev(diagnostic_goto_prefs) end,
+    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev(diagnostic_goto_prefs) end,
         { buffer = bufnr, desc = "previous [d]iagnostic" })
 
     vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end,

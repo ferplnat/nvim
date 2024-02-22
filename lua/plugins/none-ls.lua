@@ -13,6 +13,7 @@ return {
         require('null-ls').setup({
             sources = {
                 builtins.diagnostics.alex,
+                builtins.diagnostics.revive,
                 builtins.diagnostics.jsonlint,
                 builtins.diagnostics.selene,
                 builtins.diagnostics.sqlfluff.with({
