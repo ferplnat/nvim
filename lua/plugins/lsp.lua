@@ -8,6 +8,8 @@ return {
         'williamboman/mason-lspconfig.nvim',
         -- Fixes for Omnisharp
         'Hoffs/omnisharp-extended-lsp.nvim',
+        -- Dont use Omnisharp's built-in LSP
+        'jmederosalvarado/roslyn.nvim',
         'folke/neodev.nvim',
     },
 
@@ -41,7 +43,7 @@ return {
             vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
             if client.name == "omnisharp" then
-                client.server_capabilities.semanticTokensProvider = false
+                client.server_capabilities.semanticTokensProvider = nil
             end
         end
 
@@ -111,6 +113,14 @@ return {
             end,
 
             ["omnisharp"] = function()
+                --  require("roslyn").setup({
+                --      dotnet_cmd = "dotnet",              -- this is the default
+                --      roslyn_version = "4.8.0-3.23475.7", -- this is the default
+                --      on_attach = my_onattach,
+                --      capabilities = lsp_capabilities,
+                --  })
+
+
                 vim.fn.setenv("OMNISHARPHOME", vim.fn.stdpath('config') .. '/lspconfigs/omnisharp/')
 
                 local omnisharp_cmd

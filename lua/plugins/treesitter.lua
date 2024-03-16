@@ -50,17 +50,17 @@ return {
 
         if jit.os == 'Windows' and vim.fn.isdirectory(vim.fn.expand('~/nvim_parsers/tree-sitter-powershell')) == 1 then
             local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-            parser_config.PowerShell = {
+
+            parser_config.powershell = {
                 install_info = {
-                    url = "~/nvim_parsers/tree-sitter-powershell",
-                    branch = "operator001",
-                    files = { "src/parser.c", "src/scanner.c" }
+                    url = "https://github.com/airbus-cert/tree-sitter-powershell",
+                    files = { "src/parser.c", "src/scanner.c" },
                 },
                 filetype = "ps1",
             }
 
-            vim.treesitter.language.register('PowerShell', 'psm1')
-            table.insert(ensure_installed, 'PowerShell')
+            vim.treesitter.language.register('powershell', 'psm1')
+            table.insert(ensure_installed, 'powershell')
         end
 
         local remaps = require('marco.remaps.treesitter')

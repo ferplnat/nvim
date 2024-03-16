@@ -100,7 +100,7 @@ vim.filetype.add({
     }
 })
 
-local delete_hidden_buffers = function()
+local delete_hidden_buffers = function(opts)
     local buffers = vim.fn.getbufinfo()
     if buffers == nil then
         return
@@ -108,9 +108,9 @@ local delete_hidden_buffers = function()
 
     for _, buffer in pairs(buffers) do
         if buffer.hidden == 1 then
-            vim.api.nvim_buf_delete(buffer.bufnr, { force = false })
+            vim.api.nvim_buf_delete(buffer.bufnr, { force = opts.bang or false })
         end
     end
 end
 
-vim.api.nvim_create_user_command('BCleanup', delete_hidden_buffers, { desc = 'Delete all hidden buffers' })
+vim.api.nvim_create_user_command('BCleanup', delete_hidden_buffers, { desc = 'Delete all hidden buffers', bang = true })

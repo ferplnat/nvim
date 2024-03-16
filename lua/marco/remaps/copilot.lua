@@ -5,10 +5,10 @@ M.apply = function()
 end
 
 M.suggestion_maps = {
-                    accept = "<C-d>",
-                    next = "<C-.>",
-                    prev = "<C-,>",
-                    dismiss = "<C-y>",
+    prev = "<C-a>",
+    next = "<C-s>",
+    accept = "<C-d>",
+    dismiss = "<C-y>",
 }
 
 return M

@@ -10,7 +10,7 @@ M.apply = function(builtin)
     end
 
     vim.keymap.set('n', '<Leader>pgf', find_fallback, { desc = "Find Git files or files [telescope]" })
-    vim.keymap.set('n', '<Leader>pt', builtin.builtin, { desc = "Telescope telescope [telescope]" })
+    vim.keymap.set('n', '<Leader>pT', builtin.builtin, { desc = "Telescope telescope [telescope]" })
     vim.keymap.set('n', '<Leader>pts', builtin.treesitter, { desc = "Telescope treesitter [telescope]" })
     vim.keymap.set('n', '<Leader>ph', builtin.help_tags, { desc = "Telescope treesitter [telescope]" })
     vim.keymap.set('n', '<Leader>pf', builtin.find_files, { desc = "Telescope find files [telescope]" })
