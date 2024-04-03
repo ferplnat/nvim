@@ -1,10 +1,25 @@
 local M = {}
 
 M.apply = function(builtin)
+    local function find_files(opts)
+        opts = opts or {}
+
+        -- Use fd if it's available
+        if vim.fn.executable('fd') == 0 then
+            local global_opts = {
+                find_command = { 'fd', '--type', 'f', '--hidden', '--follow', '--exclude', '.git' },
+            }
+
+            opts = vim.tbl_deep_extend('force', opts, global_opts)
+        end
+
+        builtin.find_files(opts)
+    end
+
     local function find_fallback()
         if pcall(builtin.git_files) then
             return
-        elseif pcall(builtin.find_files) then
+        elseif pcall(find_files) then
             return
         end
     end
@@ -13,7 +28,7 @@ M.apply = function(builtin)
     vim.keymap.set('n', '<Leader>pT', builtin.builtin, { desc = "Telescope telescope [telescope]" })
     vim.keymap.set('n', '<Leader>pts', builtin.treesitter, { desc = "Telescope treesitter [telescope]" })
     vim.keymap.set('n', '<Leader>ph', builtin.help_tags, { desc = "Telescope treesitter [telescope]" })
-    vim.keymap.set('n', '<Leader>pf', builtin.find_files, { desc = "Telescope find files [telescope]" })
+    vim.keymap.set('n', '<Leader>pf', find_files, { desc = "Telescope find files [telescope]" })
     vim.keymap.set('n', '<Leader>pb', builtin.buffers, { desc = "Telescope buffers [telescope]" })
     vim.keymap.set('n', '<Leader>ps', builtin.live_grep, { desc = "Telescope live grep [telescope]" })
     vim.keymap.set('n', '<Leader>pgs', builtin.git_status, { desc = "Telescope git status [telescope]" })

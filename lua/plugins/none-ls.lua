@@ -4,6 +4,7 @@ return {
     [1] = 'nvimtools/none-ls.nvim',
 
     dependencies = {
+        'lsp',
         'nvim-lua/plenary.nvim',
         'williamboman/mason.nvim',
     },

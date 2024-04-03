@@ -30,6 +30,12 @@ return {
         require('oil').setup({
             default_file_explorer = true,
             keymaps = remaps.oil_keymaps,
+            view_options = {
+                show_hidden = true,
+                is_always_hidden = function(name)
+                    return vim.startswith(name, "..") -- Hide parent directory, the "-" binding is enough.
+                end,
+            },
         })
     end,
 }

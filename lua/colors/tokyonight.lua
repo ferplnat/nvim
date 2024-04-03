@@ -72,14 +72,30 @@ M.apply = function()
                 italic = true,
             }
 
+            hl['@variable'] = {
+                bold = true,
+            }
+
+            hl['@lsp.type.variable'] = {
+                link = "@variable",
+            }
+
             hl['@parameter'] = {
                 fg = c.yellow,
                 italic = true,
             }
 
+            hl['@variable.parameter'] = {
+                link = "@parameter",
+            }
+
             -- TODO FIXME NOTE
             hl.Todo = {
                 fg = c.yellow,
+            }
+
+            hl['@comment.todo'] = {
+                link = "Todo",
             }
 
             hl['@text.danger.comment'] = {
