@@ -101,15 +101,6 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
     end,
 })
 
--- Set gitcommit filetype preferences
-vim.api.nvim_create_autocmd({ 'FileType' }, {
-    group = auto_command_group,
-    pattern = 'gitcommit',
-    callback = function(ev)
-        vim.bo[ev.buf].textwidth = 72
-    end,
-})
-
 vim.filetype.add({
     extension = {
         ['azcli'] = 'azcli',

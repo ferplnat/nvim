@@ -128,8 +128,8 @@ return {
 
             ["omnisharp"] = function()
                 require("roslyn").setup({
-                    dotnet_cmd = "dotnet",              -- this is the default
-                    roslyn_version = "4.8.0-3.23475.7", -- this is the default
+                    dotnet_cmd = "dotnet",                -- this is the default
+                    roslyn_version = "4.11.0-1.24179.11", -- this is the default
                     on_attach = my_onattach,
                     capabilities = lsp_capabilities,
                 })
