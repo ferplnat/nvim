@@ -1,3 +1,6 @@
+-- File options
+vim.o.autoread = true
+
 -- Indentation options
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -38,14 +41,16 @@ vim.o.cmdheight = 3
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Split options
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
 -- Relative line numbers with a different color for specified intervals
 local interval = 10
 vim.api.nvim_set_hl(0, 'LineNrAlt', { fg = '#fc9867' })
 vim.o.stc = '%#LineNrAlt#%{&rnu&&(v:relnum==0)?"".v:lnum:""}%=' ..
     '%#LineNr#%{&rnu&&(v:relnum%' .. interval .. '&&v:relnum!=0)?"".v:relnum:""}' ..
     '%#LineNrAlt#%{&rnu&&!(v:relnum%' .. interval .. '||v:relnum==0)?"".v:relnum:""} '
-
-local utils = require('marco.utils')
 
 local cursor_center_exclude_filetypes = {
     'lazy',
@@ -78,8 +83,13 @@ vim.g.centercursor = true
 vim.keymap.set('n', '<leader>cc', function() vim.g.centercursor = not vim.g.centercursor end,
     { desc = 'Toggle center cursor' })
 
+local center_cursor = function()
+    vim.fn.execute('normal! zz', 'silent!')
+end
+
+
 local auto_command_group = vim.api.nvim_create_augroup('marco-autocmd', {})
-vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
     group = auto_command_group,
     callback = function()
         if not vim.g.centercursor then
@@ -95,9 +105,7 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
             return
         end
 
-        utils.execute_keep_cursor(function()
-            vim.cmd([[silent! normal! zz]])
-        end)
+        center_cursor()
     end,
 })
 

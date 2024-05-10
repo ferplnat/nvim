@@ -4,6 +4,9 @@ return {
     [1] = 'ferplnat/linedancing.nvim',
 
     dependencies = {
+        'vim-fugitive',
+        'vim-sleuth',
+
         'nvim-lua/plenary.nvim',
     },
 
@@ -164,6 +167,17 @@ return {
                     event = { 'RecordingEnter', 'RecordingLeave' },
                     position = 'center',
                     eval = false,
+                },
+
+                {
+                    name = 'sleuth',
+                    callback = function()
+                        return '[%{SleuthIndicator()}] '
+                    end,
+                    highlight = '',
+                    event = { 'BufEnter', 'ModeChanged' },
+                    position = 'right',
+                    eval = true,
                 },
 
                 {

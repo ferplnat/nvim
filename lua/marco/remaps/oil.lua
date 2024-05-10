@@ -9,7 +9,7 @@ M.oil_buf_maps = function(event)
         callback = function()
             local message = string.format("cwd is now \"%s\"", vim.fn.expand('%'))
             vim.api.nvim_echo({ { message, nil } }, false, {})
-            require('oil.actions').cd.callback()
+            require('oil.actions').tcd.callback()
         end,
         desc = "Change cwd to current location"
     })

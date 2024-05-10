@@ -18,7 +18,7 @@ return {
         require('telescope').setup({
             extensions = {
                 ["ui-select"] = {
-                    themes.get_cursor(),
+                    themes.get_dropdown(),
                 },
 
                 ["cmdline"] = {

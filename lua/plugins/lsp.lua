@@ -14,6 +14,8 @@ return {
     },
 
     config = function()
+        local marco_utils = require('marco.utils')
+
         require('mason').setup()
         local remaps = require('marco.remaps.lsp')
 
@@ -41,10 +43,6 @@ return {
 
         local my_onattach = function(_, bufnr)
             remaps.on_attach(bufnr)
-            if vim.bo[bufnr].filetype == 'ps1' then
-                vim.cmd.syntax({ args = { 'enable' }, mods = { silent = true } })
-            end
-
             vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
         end
 
@@ -86,27 +84,17 @@ return {
             end,
 
             ["powershell_es"] = function()
-                local on_new_config = function(new_config, _)
-                    if jit.os == 'Windows' and vim.fn.executable('pwsh') == 1 then
-                        vim.ui.select({ 'powershell.exe', 'pwsh' }, {
-                                prompt = "Select a shell for PowerShell Editor Services",
-                            },
-                            function(selected)
-                                new_config.shell = selected
-                            end
-                        )
-                    end
-                    require('lspconfig.server_configurations.powershell_es').default_config.on_new_config(new_config, _)
-                end
-
                 require('lspconfig').powershell_es.setup({
+                    shell = "powershell.exe",
                     capabilities = lsp_capabilities,
-                    on_attach = my_onattach,
-                    on_new_config = on_new_config,
+                    on_attach = marco_utils.extend_func(my_onattach, function()
+                        vim.cmd.syntax({ args = { 'enable' }, mods = { silent = true } })
+                    end),
                     filetypes = {
                         "ps1",
                         "psm1",
                     },
+                    single_file_support = true,
                     settings = {
                         powershell = {
                             codeFormatting = {
@@ -127,40 +115,49 @@ return {
             end,
 
             ["omnisharp"] = function()
-                require("roslyn").setup({
-                    dotnet_cmd = "dotnet",                -- this is the default
-                    roslyn_version = "4.11.0-1.24179.11", -- this is the default
-                    on_attach = my_onattach,
-                    capabilities = lsp_capabilities,
-                })
+                --require("roslyn").setup({
+                --    dotnet_cmd = "dotnet",                -- this is the default
+                --    roslyn_version = "4.11.0-1.24209.10", -- this is the default
+                --    on_attach = my_onattach,
+                --    capabilities = lsp_capabilities,
+                --})
 
+                vim.filetype.add({
+                    extension = {
+                        ['razor'] = 'razor',
+                    }
+                })
 
                 vim.fn.setenv("OMNISHARPHOME", vim.fn.stdpath('config') .. '/lspconfigs/omnisharp/')
 
-                --local omnisharp_cmd
-                --if jit.os == 'Windows' then
-                --    omnisharp_cmd = { vim.fn.stdpath('data') .. '/mason/packages/omnisharp/libexec/omnisharp.exe' }
-                --end
+                local omnisharp_cmd
+                if jit.os == 'Windows' then
+                    omnisharp_cmd = { vim.fn.stdpath('data') .. '/mason/packages/omnisharp/libexec/omnisharp.exe' }
+                end
 
-                --require('lspconfig').omnisharp.setup({
-                --    cmd = omnisharp_cmd,
-                --    capabilities = lsp_capabilities,
-                --    on_attach = my_onattach,
-                --    handlers = {
-                --        ["textDocument/definition"] = require('omnisharp_extended').handler,
-                --    },
-                --    root_dir = require('lspconfig').util.root_pattern('*.sln', '*.csproj', 'omnisharp.json',
-                --        'function.json'),
+                require('lspconfig').omnisharp.setup({
+                    cmd = omnisharp_cmd,
+                    capabilities = lsp_capabilities,
+                    on_attach = my_onattach,
+                    filetypes = { 'cs', 'vb', },
+                    handlers = {
+                        ["textDocument/definition"] = require('omnisharp_extended').handler,
+                    },
+                    root_dir = require('lspconfig').util.root_pattern('*.sln', '*.csproj', 'omnisharp.json',
+                        'function.json'),
 
-                --    -- Disable all so that omnisharp.json is used
-                --    enable_editorconfig_support = false,
-                --    enable_ms_build_load_projects_on_demand = false,
-                --    enable_roslyn_analyzers = false,
-                --    organize_imports_on_format = false,
-                --    enable_import_completion = false,
-                --    sdk_include_prereleases = false,
-                --    analyze_open_documents_only = false,
-                --})
+                    -- Disable all so that omnisharp.json is used
+                    enable_editorconfig_support = false,
+                    enable_ms_build_load_projects_on_demand = false,
+                    enable_roslyn_analyzers = false,
+                    organize_imports_on_format = false,
+                    enable_import_completion = false,
+                    sdk_include_prereleases = false,
+                    analyze_open_documents_only = false,
+                })
+            end,
+
+            ["jsonls"] = function()
             end,
 
             ["yamlls"] = function()
