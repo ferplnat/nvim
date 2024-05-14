@@ -2,7 +2,7 @@ local M = {}
 
 M.on_attach = function(bufnr)
     local diagnostic_float = {
-        width = 50
+        width = 50,
     }
 
     local diagnostic_goto_prefs = {

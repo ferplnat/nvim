@@ -35,7 +35,7 @@ M.apply = function(harpoon)
 
     local function file_added()
         local message = string.format("Harpoon'd \"%s\"", vim.fn.expand('%'))
-        vim.api.nvim_echo({ { message, nil } }, false, {})
+        vim.api.nvim_notify(message, vim.log.levels.INFO, { title = "Harpoon" })
 
         harpoon:list():append()
     end

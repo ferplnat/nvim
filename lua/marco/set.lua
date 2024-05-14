@@ -129,3 +129,45 @@ local delete_hidden_buffers = function(opts)
 end
 
 vim.api.nvim_create_user_command('BCleanup', delete_hidden_buffers, { desc = 'Delete all hidden buffers', bang = true })
+
+---@diagnostic disable-next-line: duplicate-set-field
+vim.api.nvim_notify = function(message, log_level, opts)
+    opts = opts or {}
+    log_level = log_level or vim.log.levels.INFO
+
+    if opts.title then
+        message = '[' .. opts.title .. '] ' .. message
+    end
+
+    vim.notify(message, log_level, opts)
+end
+
+-- Things are better when I know where they come from.
+local diagnostic_with_source = function(diagnostic)
+    local success, namespace_name = pcall(function(ns)
+        return vim.diagnostic.get_namespace(ns).name
+    end, diagnostic.namespace)
+
+    if not success then
+        return diagnostic.message
+    end
+
+    if vim.startswith(namespace_name, 'vim.lsp') then
+        namespace_name = vim.split(namespace_name, '.', { plain = true })[3]
+    else
+        namespace_name = nil
+    end
+
+    namespace_name = namespace_name or diagnostic.source or 'unknown'
+
+    return string.format("[%s] %s", namespace_name, diagnostic.message)
+end
+
+vim.diagnostic.config({
+    float = {
+        format = diagnostic_with_source,
+    },
+    virtual_text = {
+        format = diagnostic_with_source,
+    },
+}, nil)
