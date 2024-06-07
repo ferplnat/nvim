@@ -1,35 +1,37 @@
 local M = {}
 
-M.telescope_attach_mappings = function(harpoon)
-    return function(_, map)
-        map("i", "<C-d>", function(picker_bufnr)
-            local picker = require("telescope.actions.state").get_current_picker(picker_bufnr)
-
-            picker:delete_selection(function(selection)
-                harpoon:list():removeAt(selection.index)
-            end)
-        end)
-        return true
-    end
-end
-
 M.apply = function(harpoon)
     -- basic telescope configuration
     local conf = require("telescope.config").values
+
     local toggle_telescope = function(harpoon_files)
-        local file_paths = {}
-        for _, item in ipairs(harpoon_files.items) do
-            table.insert(file_paths, item.value)
+        local finder = function()
+            local paths = {}
+            for _, item in ipairs(harpoon_files.items) do
+                table.insert(paths, item.value)
+            end
+
+            return require("telescope.finders").new_table({
+                results = paths,
+            })
         end
 
         require("telescope.pickers").new({}, {
             prompt_title = "Harpoon",
-            finder = require("telescope.finders").new_table({
-                results = file_paths,
-            }),
+            finder = finder(),
             previewer = conf.file_previewer({}),
             sorter = conf.generic_sorter({}),
-            attach_mappings = M.telescope_attach_mappings(harpoon),
+            attach_mappings = function(prompt_bufnr, map)
+                map("i", "<C-d>", function()
+                    local state = require("telescope.actions.state")
+                    local selected_entry = state.get_selected_entry()
+                    local current_picker = state.get_current_picker(prompt_bufnr)
+
+                    table.remove(harpoon_files.items, selected_entry.index)
+                    current_picker:refresh(finder())
+                end)
+                return true
+            end,
         }):find()
     end
 
@@ -37,7 +39,7 @@ M.apply = function(harpoon)
         local message = string.format("Harpoon'd \"%s\"", vim.fn.expand('%'))
         vim.api.nvim_notify(message, vim.log.levels.INFO, { title = "Harpoon" })
 
-        harpoon:list():append()
+        harpoon:list():add()
     end
 
     vim.keymap.set("n", "<C-h>", function() toggle_telescope(harpoon:list()) end,

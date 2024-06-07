@@ -12,6 +12,7 @@ return {
             hide_numbers = false,
             direction = 'horizontal',
             size = 30,
+            persist_size = true,
             shade_terminals = false,
 
             highlights = {

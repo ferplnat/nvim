@@ -12,7 +12,7 @@ M.on_attach = function(bufnr)
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end,
         { buffer = bufnr, desc = "[g]o to [d]efinition" })
 
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end,
+    vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ width = 30 }) end,
         { buffer = bufnr, desc = "Show hover" })
 
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end,

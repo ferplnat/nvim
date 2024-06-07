@@ -14,11 +14,12 @@ return {
         local ensure_installed = {
             'alex',
             'nilaway',
+            'prettierd',
             'revive',
             'selene',
-            'staticcheck',
             'shellcheck',
             'sqlfluff',
+            'staticcheck',
             'yamllint',
         }
 

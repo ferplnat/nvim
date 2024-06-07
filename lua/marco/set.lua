@@ -37,6 +37,9 @@ vim.opt.termguicolors = true
 
 vim.o.cmdheight = 3
 
+-- Statusline options
+vim.opt.laststatus = 3
+
 -- Statuscolumn options
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -80,7 +83,11 @@ end
 -- Keep cursor centered at all times
 vim.g.centercursor = true
 
-vim.keymap.set('n', '<leader>cc', function() vim.g.centercursor = not vim.g.centercursor end,
+vim.keymap.set('n', '<leader>cc',
+    function()
+        vim.g.centercursor = not vim.g.centercursor
+        vim.api.nvim_notify('Center cursor ' .. (vim.g.centercursor and 'enabled' or 'disabled'), vim.log.levels.INFO)
+    end,
     { desc = 'Toggle center cursor' })
 
 local center_cursor = function()
@@ -130,18 +137,6 @@ end
 
 vim.api.nvim_create_user_command('BCleanup', delete_hidden_buffers, { desc = 'Delete all hidden buffers', bang = true })
 
----@diagnostic disable-next-line: duplicate-set-field
-vim.api.nvim_notify = function(message, log_level, opts)
-    opts = opts or {}
-    log_level = log_level or vim.log.levels.INFO
-
-    if opts.title then
-        message = '[' .. opts.title .. '] ' .. message
-    end
-
-    vim.notify(message, log_level, opts)
-end
-
 -- Things are better when I know where they come from.
 local diagnostic_with_source = function(diagnostic)
     local success, namespace_name = pcall(function(ns)
@@ -155,10 +150,12 @@ local diagnostic_with_source = function(diagnostic)
     if vim.startswith(namespace_name, 'vim.lsp') then
         namespace_name = vim.split(namespace_name, '.', { plain = true })[3]
     else
-        namespace_name = nil
+        namespace_name = namespace_name or diagnostic.source
     end
 
-    namespace_name = namespace_name or diagnostic.source or 'unknown'
+    if not namespace_name then
+        return diagnostic.message
+    end
 
     return string.format("[%s] %s", namespace_name, diagnostic.message)
 end

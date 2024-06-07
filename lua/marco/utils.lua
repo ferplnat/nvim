@@ -37,4 +37,38 @@ M.extend_func = function(func, new_func)
     end
 end
 
+M.prepend_func = function(func, new_func)
+    return function(...)
+        new_func(...)
+        func(...)
+    end
+end
+
+M.lspconfig_run_before_start = function(func, server_name)
+    local success, lspconfig = pcall(require, 'lspconfig')
+    if not success then
+        return
+    end
+
+    local manager = require('lspconfig.manager')
+
+    if server_name then
+        func = M.prepend_func(func, function(this, bufnr, new_config, root_dir, single_file)
+            if new_config.name ~= server_name then
+                return
+            end
+
+            return func(this, bufnr, new_config, root_dir, single_file)
+        end)
+    end
+
+    ---@diagnostic disable-next-line: invisible
+    manager._start_new_client = lspconfig.util.add_hook_before(manager._start_new_client, func)
+end
+
+M.sort_func = function()
+    vim.api.nvim_notify("Sorting lines", vim.log.levels.INFO, {})
+    vim.cmd("'[,']sort")
+end
+
 return M

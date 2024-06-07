@@ -18,12 +18,6 @@ return {
         local remaps = require('marco.remaps.cmp')
         require("luasnip.loaders.from_vscode").lazy_load()
 
-        local insert_completion_sources = {
-            { name = 'nvim_lsp_signature_help', },
-            { name = 'nvim_lsp', },
-            { name = 'luasnip', },
-        }
-
         cmp.setup({
             snippet = {
                 expand = function(args)
@@ -41,7 +35,15 @@ return {
 
             mapping = remaps.mappings,
 
-            sources = insert_completion_sources
+            sources = {
+                { name = 'nvim_lsp',                group_index = 1 },
+                { name = 'luasnip',                 group_index = 1 },
+
+                { name = 'nvim_lsp_signature_help', group_index = 2 },
+                { name = 'luasnip',                 group_index = 2 },
+
+                { name = 'buffer',                  group_index = 3 },
+            }
         })
 
         -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
@@ -55,11 +57,11 @@ return {
         -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
         cmp.setup.cmdline(':', {
             mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources(
-                {
-                    { name = 'path',    group_index = 1 },
-                    { name = 'cmdline', group_index = 2 },
-                })
+            sources = {
+                { name = 'path', },
+                { name = 'cmdline', },
+            }
+
         })
     end,
 }

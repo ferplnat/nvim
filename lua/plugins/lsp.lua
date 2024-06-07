@@ -23,6 +23,7 @@ return {
             'clangd',
             'dockerls',
             'gopls',
+            'html',
             'lua_ls',
             'marksman',
             'taplo',

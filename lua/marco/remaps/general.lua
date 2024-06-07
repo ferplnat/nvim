@@ -22,6 +22,14 @@ local command_with_count = function(cmd, mode, keep_cursor_position)
     end
 end
 
+local sort_func_map = function()
+    -- I have to set the opfunc to a requirable function to avoid populating the global namespace.
+    -- Local functions are not reachable from the vimscript.
+    -- NOTE: Parentheses do not work here, so I have to omit them. Do not try to add them.
+    vim.go.opfunc = "v:lua.require'marco.utils'.sort_func"
+    return "g@V"
+end
+
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Go to netrw (root dir)" })
 
@@ -56,3 +64,5 @@ vim.keymap.set("n", "]O", command_with_count("o", "normal!", true),
     { desc = "Insert new line below, keep cursor position" })
 vim.keymap.set("n", "[O", command_with_count("O", "normal!", true),
     { desc = "Insert new line above, keep cursor position" })
+
+vim.keymap.set("n", "<leader>s", sort_func_map, { expr = true, noremap = true, desc = "Sort motion" })
