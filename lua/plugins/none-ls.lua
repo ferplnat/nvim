@@ -13,11 +13,13 @@ return {
     config = function()
         local ensure_installed = {
             'alex',
+            'codespell',
             'nilaway',
             'prettierd',
             'revive',
             'selene',
             'shellcheck',
+            'shfmt',
             'sqlfluff',
             'staticcheck',
             'yamllint',
@@ -35,6 +37,7 @@ return {
             debounce = 1000,                         -- I enter and exit insert mode a lot. Also helps with macro recording.
             sources = {
                 builtins.diagnostics.alex,           -- Markdown linter
+                builtins.diagnostics.codespell,      -- Spell checker
                 builtins.diagnostics.revive,         -- Go linter
                 builtins.diagnostics.selene,         -- Lua linter
                 builtins.diagnostics.staticcheck,    -- Go linter

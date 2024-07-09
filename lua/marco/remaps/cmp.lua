@@ -24,6 +24,21 @@ M.mappings = {
             fallback()
         end
     end, { "i", "s" }),
+
+    ['<C-d>'] = require('cmp').mapping(function()
+        if require('cmp').visible() then
+            require('cmp').close()
+            require('cmp').abort()
+        end
+
+        require('cmp').complete({
+            config = {
+                sources = {
+                    { name = 'copilot', group_index = 1 }
+                }
+            }
+        }, { "i", "s", })
+    end),
 }
 
 return M

@@ -39,7 +39,7 @@
         "SpaceBeforeDot": false,
         "SpaceBeforeSemicolonsInForStatement": false,
         "SpacingAroundBinaryOperator": "single",
-        "IndentBraces": false,
+        "IndentBraces": true,
         "IndentBlock": true,
         "IndentSwitchSection": true,
         "IndentSwitchCaseSection": true,

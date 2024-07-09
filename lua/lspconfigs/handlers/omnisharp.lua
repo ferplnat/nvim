@@ -14,14 +14,10 @@ return function(capabilities, on_attach)
 
     vim.fn.setenv("OMNISHARPHOME", vim.fn.stdpath('config') .. '/lsp-config-files/omnisharp/')
 
-    local omnisharp_cmd
-    if jit.os == 'Windows' then
-        omnisharp_cmd = { vim.fn.stdpath('data') .. '/mason/packages/omnisharp/libexec/omnisharp.exe' }
-    end
-
     require('lspconfig').omnisharp.setup({
-        cmd = omnisharp_cmd,
+        cmd = { require('marco.utils').get_mason_bin_path('omnisharp') },
         capabilities = capabilities,
+        single_file_support = false,
         on_attach = on_attach,
         filetypes = { 'cs', 'vb', },
         handlers = {

@@ -1,7 +1,7 @@
 return function(capabilities, on_attach)
     local marco_utils = require('marco.utils')
     require('lspconfig').powershell_es.setup({
-        shell = "powershell.exe",
+        shell = "pwsh.exe",
         capabilities = capabilities,
         on_attach = marco_utils.extend_func(on_attach, function()
             vim.cmd.syntax({ args = { 'enable' }, mods = { silent = true } })

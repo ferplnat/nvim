@@ -6,6 +6,7 @@ return {
 
     config = function()
         local remaps = require('marco.remaps.toggleterm')
+
         require('toggleterm').setup({
             open_mapping = remaps.open_mapping,
             insert_mappings = false,
@@ -20,6 +21,10 @@ return {
                     link = 'ToggleTermNormal',
                 },
 
+                NormalFloat = {
+                    link = 'ToggleTermNormalFloat',
+                },
+
                 StatusLine = {
                     link = 'ToggleTermStatusLine',
                 },
@@ -30,5 +35,7 @@ return {
                 remaps.on_open(term)
             end,
         })
+
+        remaps.apply()
     end,
 }

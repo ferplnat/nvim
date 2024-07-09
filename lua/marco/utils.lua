@@ -67,8 +67,17 @@ M.lspconfig_run_before_start = function(func, server_name)
 end
 
 M.sort_func = function()
-    vim.api.nvim_notify("Sorting lines", vim.log.levels.INFO, {})
     vim.cmd("'[,']sort")
+end
+
+M.get_mason_bin_path = function(executable)
+    local mason_bin = vim.fn.stdpath('data') .. '/mason/bin'
+
+    if jit.os == 'Windows' then
+        executable = executable .. '.cmd'
+    end
+
+    return mason_bin .. '/' .. executable
 end
 
 return M

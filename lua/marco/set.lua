@@ -1,5 +1,6 @@
 -- File options
 vim.o.autoread = true
+vim.o.ff = 'unix'
 
 -- Indentation options
 vim.opt.tabstop = 4
@@ -150,7 +151,7 @@ local diagnostic_with_source = function(diagnostic)
     if vim.startswith(namespace_name, 'vim.lsp') then
         namespace_name = vim.split(namespace_name, '.', { plain = true })[3]
     else
-        namespace_name = namespace_name or diagnostic.source
+        namespace_name = diagnostic.source
     end
 
     if not namespace_name then

@@ -2,19 +2,20 @@
 return {
     name = 'copilot',
     [1] = 'zbirenbaum/copilot.lua',
-    version = '*',
+    dependencies = {
+        'cmp',
+        'zbirenbaum/copilot-cmp',
+    },
+    event = 'InsertEnter',
     config = function()
         local remaps = require('marco.remaps.copilot')
         require('copilot').setup({
             panel = {
-                enabled = true,
+                enabled = false,
             },
-
             suggestion = {
-                enabled = true,
-                auto_trigger = true,
-                debounce = 75,
-                keymap = remaps.suggestion_maps,
+                enabled = false,
+                auto_trigger = false,
             },
 
             filetypes = {
@@ -35,5 +36,6 @@ return {
         })
 
         remaps.apply()
+        require("copilot_cmp").setup()
     end,
 }

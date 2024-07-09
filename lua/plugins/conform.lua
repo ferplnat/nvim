@@ -13,6 +13,7 @@ return
 
         require('conform').setup({
             go = { "gofmt" },
+            sh = { "shfmt" },
             ['*'] = { "codespell" },
             format_on_save = {
                 -- These options will be passed to conform.format()
