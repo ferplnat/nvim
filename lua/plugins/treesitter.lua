@@ -15,17 +15,17 @@ return {
             'bash',
             'bicep',
             'c',
+            'c_sharp',
+            'comment', -- TODO: and NOTE: FIXME: etc
             'cpp',
             'css',
             'csv',
-            'c_sharp',
-            'comment', -- TODO: and NOTE: FIXME: etc
             'diff',
             'dockerfile',
-            'gitcommit',
-            'gitignore',
             'git_config',
             'git_rebase',
+            'gitcommit',
+            'gitignore',
             'go',
             'gomod',
             'gosum',
@@ -35,6 +35,7 @@ return {
             'lua',
             'luadoc',
             'markdown',
+            'powershell',
             'python',
             'regex',
             'sql',
@@ -48,23 +49,12 @@ return {
             'yaml',
         }
 
-        if jit.os == 'Windows' and vim.fn.isdirectory(vim.fn.expand('~/nvim_parsers/tree-sitter-powershell')) == 1 then
-            local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-
-            parser_config.powershell = {
-                install_info = {
-                    url = "https://github.com/airbus-cert/tree-sitter-powershell",
-                    files = { "src/parser.c", "src/scanner.c" },
-                },
-                filetype = "ps1",
-            }
-
-            vim.treesitter.language.register('powershell', 'psm1')
-            table.insert(ensure_installed, 'powershell')
-        end
-
         local remaps = require('marco.remaps.treesitter')
         remaps.apply()
+
+        -- Let treesitter take precedence over semantic token highlighting as it
+        -- is usually more granular.
+        vim.highlight.priorities.semantic_tokens = 95
 
         require('nvim-treesitter.configs').setup({
             ensure_installed = ensure_installed,

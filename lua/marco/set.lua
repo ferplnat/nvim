@@ -56,6 +56,16 @@ vim.o.stc = '%#LineNrAlt#%{&rnu&&(v:relnum==0)?"".v:lnum:""}%=' ..
     '%#LineNr#%{&rnu&&(v:relnum%' .. interval .. '&&v:relnum!=0)?"".v:relnum:""}' ..
     '%#LineNrAlt#%{&rnu&&!(v:relnum%' .. interval .. '||v:relnum==0)?"".v:relnum:""} '
 
+vim.filetype.add({
+    extension = {
+        ['azcli'] = 'azcli',
+        ['kusto'] = 'kusto',
+        ['kql'] = 'kusto',
+        ['csl'] = 'kusto',
+    }
+})
+
+
 local cursor_center_exclude_filetypes = {
     'lazy',
     'netrw',
@@ -66,8 +76,13 @@ local cursor_center_exclude_filetypes = {
 }
 
 if jit.os == 'Windows' then
+    local powershell_cmd = vim.fn.getenv('PSCMD')
+    if powershell_cmd == vim.NIL then
+        powershell_cmd = 'powershell'
+    end
+
     local powershell_options = {
-        shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell',
+        shell = powershell_cmd,
         shellcmdflag =
         '-NoLogo -NoProfile -ExecutionPolicy Bypass -Command "[Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8";',
         shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait',
@@ -115,12 +130,6 @@ vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
 
         center_cursor()
     end,
-})
-
-vim.filetype.add({
-    extension = {
-        ['azcli'] = 'azcli',
-    }
 })
 
 local delete_hidden_buffers = function(opts)

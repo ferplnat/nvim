@@ -78,6 +78,7 @@ M.apply = function()
             }
 
             hl['@variable'] = {
+                fg = hl.Normal.fg,
                 bold = true,
             }
 

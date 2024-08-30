@@ -14,25 +14,25 @@ return function(capabilities, on_attach)
 
     vim.fn.setenv("OMNISHARPHOME", vim.fn.stdpath('config') .. '/lsp-config-files/omnisharp/')
 
-    require('lspconfig').omnisharp.setup({
-        cmd = { require('marco.utils').get_mason_bin_path('omnisharp') },
-        capabilities = capabilities,
-        single_file_support = false,
-        on_attach = on_attach,
-        filetypes = { 'cs', 'vb', },
-        handlers = {
-            ["textDocument/definition"] = require('omnisharp_extended').handler,
-        },
-        root_dir = require('lspconfig').util.root_pattern('*.sln', '*.csproj', 'omnisharp.json',
-            'function.json'),
-
-        -- Disable all so that omnisharp.json is used
-        enable_editorconfig_support = false,
-        enable_ms_build_load_projects_on_demand = false,
-        enable_roslyn_analyzers = false,
-        organize_imports_on_format = false,
-        enable_import_completion = false,
-        sdk_include_prereleases = false,
-        analyze_open_documents_only = false,
-    })
+    -- require('lspconfig').omnisharp.setup({
+    --     cmd = { require('marco.utils').get_mason_bin_path('omnisharp') },
+    --     capabilities = capabilities,
+    --     single_file_support = false,
+    --     on_attach = on_attach,
+    --     filetypes = { 'cs', 'vb', },
+    --     handlers = {
+    --         ["textDocument/definition"] = require('omnisharp_extended').handler,
+    --     },
+    --     root_dir = require('lspconfig').util.root_pattern('*.sln', '*.csproj', 'omnisharp.json',
+    --         'function.json'),
+    --
+    --     -- Disable all so that omnisharp.json is used
+    --     enable_editorconfig_support = false,
+    --     enable_ms_build_load_projects_on_demand = false,
+    --     enable_roslyn_analyzers = false,
+    --     organize_imports_on_format = false,
+    --     enable_import_completion = false,
+    --     sdk_include_prereleases = false,
+    --     analyze_open_documents_only = false,
+    -- })
 end
