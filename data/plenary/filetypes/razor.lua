@@ -1,5 +1,0 @@
-return {
-    extension = {
-        ['razor'] = 'razor',
-    }
-}

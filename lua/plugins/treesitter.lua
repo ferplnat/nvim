@@ -54,6 +54,7 @@ return {
 
         -- Let treesitter take precedence over semantic token highlighting as it
         -- is usually more granular.
+        -- Override in lsp on_attach if this isn't desired.
         vim.highlight.priorities.semantic_tokens = 95
 
         require('nvim-treesitter.configs').setup({

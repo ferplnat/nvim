@@ -5,6 +5,8 @@ return function(capabilities, on_attach)
     ---@diagnostic disable-next-line: invisible
     manager._start_new_client = lspconfig.util.add_hook_before(manager._start_new_client,
         function(_, _, new_config, root_dir, _)
+            vim.fn.setenv('TFLINT_LOG', 'error')
+
             if new_config.name ~= 'tflint' then
                 return
             end

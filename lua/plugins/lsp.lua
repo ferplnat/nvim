@@ -6,15 +6,14 @@ return {
     dependencies = {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
-        -- Fixes for Omnisharp
-        'Hoffs/omnisharp-extended-lsp.nvim',
-        -- Dont use Omnisharp's built-in LSP
         'seblj/roslyn.nvim',
         'folke/neodev.nvim',
+        'blink.cmp',
     },
 
     config = function()
         require('mason').setup()
+
         local remaps = require('marco.remaps.lsp')
 
         local ensure_installed = {
@@ -26,21 +25,17 @@ return {
             'html',
             'lua_ls',
             'marksman',
+            'powershell_es',
             'taplo',
             'terraformls',
             'tflint',
         }
 
-        if jit.os == 'Windows' then
-            table.insert(ensure_installed, 'powershell_es')
-            table.insert(ensure_installed, 'omnisharp@v1.39.8') -- 1.39.10 is broken; 1.39.9 is worse.
-        end
-
         -- neodev needs to be called before lspconfig
-        require("neodev").setup({})
+        require("neodev").setup()
 
         local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
-        lsp_capabilities = vim.tbl_deep_extend('force', lsp_capabilities, require('cmp_nvim_lsp').default_capabilities())
+        lsp_capabilities = vim.tbl_deep_extend('force', lsp_capabilities, require('blink.cmp').get_lsp_capabilities())
 
         local my_onattach = function(_, bufnr)
             remaps.on_attach(bufnr)
@@ -51,23 +46,7 @@ return {
             ---@diagnostic disable-next-line: missing-fields
             config = {
                 on_attach = my_onattach,
-                settings = {
-                    ["csharp|inlay_hints"] = {
-                        csharp_enable_inlay_hints_for_implicit_object_creation = true,
-                        csharp_enable_inlay_hints_for_implicit_variable_types = true,
-                        csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-                        csharp_enable_inlay_hints_for_types = true,
-                        dotnet_enable_inlay_hints_for_indexer_parameters = true,
-                        dotnet_enable_inlay_hints_for_literal_parameters = true,
-                        dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-                        dotnet_enable_inlay_hints_for_other_parameters = true,
-                        dotnet_enable_inlay_hints_for_parameters = true,
-                        dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-                        dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-                        dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-                    },
-                },
-            },
+            }
         })
 
         -- LSP Server Specific Configs

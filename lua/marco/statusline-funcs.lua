@@ -49,7 +49,7 @@ M.buf_info = function(event)
         lspMessage = lspMessage .. " [TS]"
     end
 
-    return " | " .. lspMessage
+    return lspMessage .. " | "
 end
 
 M.mode = function(event)
@@ -117,6 +117,10 @@ M.recording = function(event)
     else
         return ' rec: @' .. rec
     end
+end
+
+M.fileformat = function(event)
+    return vim.bo[event.buf].ff .. ' '
 end
 
 M.sleuth = function()

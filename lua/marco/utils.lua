@@ -80,4 +80,14 @@ M.get_mason_bin_path = function(executable)
     return mason_bin .. '/' .. executable
 end
 
+M.get_mason_package_path = function(executable)
+    local mason_bin = vim.fn.stdpath('data') .. '/mason/packages/' .. executable
+
+    if jit.os == 'Windows' then
+        executable = executable .. '.exe'
+    end
+
+    return mason_bin .. '/' .. executable
+end
+
 return M

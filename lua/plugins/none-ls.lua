@@ -14,6 +14,7 @@ return {
         local ensure_installed = {
             'alex',
             'codespell',
+            'hadolint',
             'nilaway',
             'prettierd',
             'revive',
@@ -38,6 +39,7 @@ return {
             sources = {
                 builtins.diagnostics.alex,           -- Markdown linter
                 builtins.diagnostics.codespell,      -- Spell checker
+                builtins.diagnostics.hadolint,       -- Dockerfile linter
                 builtins.diagnostics.revive,         -- Go linter
                 builtins.diagnostics.selene,         -- Lua linter
                 builtins.diagnostics.staticcheck,    -- Go linter

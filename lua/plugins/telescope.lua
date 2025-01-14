@@ -43,10 +43,6 @@ return {
         remaps.apply(builtin)
         require("telescope").load_extension("ui-select")
 
-        require('plenary.filetype').add_file('bicep')
-        require('plenary.filetype').add_file('fastbuild')
-        require('plenary.filetype').add_file('kusto')
-        require('plenary.filetype').add_file('ps1')
-        require('plenary.filetype').add_file('terraform')
+        require('plenary.filetype').add_file('extras')
     end,
 }

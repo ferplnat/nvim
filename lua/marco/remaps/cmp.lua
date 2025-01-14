@@ -9,7 +9,7 @@ M.mappings = {
     ['<C-s>'] = require('cmp').mapping.complete(),
     ['<C-j>'] = require('cmp').mapping.scroll_docs(-4),
     ['<C-k>'] = require('cmp').mapping.scroll_docs(4),
-    ['<Tab>'] = require('cmp').mapping(function(fallback)
+    ['<Leader-l>'] = require('cmp').mapping(function(fallback)
         if require('luasnip').expand_or_locally_jumpable() and not require('cmp').visible() then
             require('luasnip').expand_or_jump()
         else
@@ -17,11 +17,9 @@ M.mappings = {
         end
     end, { "i", "s" }),
 
-    ['<S-Tab>'] = require('cmp').mapping(function(fallback)
+    ['<Leader-h>'] = require('cmp').mapping(function()
         if require('luasnip').expand_or_locally_jumpable() and not require('cmp').visible() then
             require('luasnip').jump(-1)
-        else
-            fallback()
         end
     end, { "i", "s" }),
 

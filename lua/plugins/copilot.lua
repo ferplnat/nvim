@@ -2,11 +2,7 @@
 return {
     name = 'copilot',
     [1] = 'zbirenbaum/copilot.lua',
-    dependencies = {
-        'cmp',
-        'zbirenbaum/copilot-cmp',
-    },
-    event = 'InsertEnter',
+
     config = function()
         local remaps = require('marco.remaps.copilot')
         require('copilot').setup({
@@ -36,6 +32,5 @@ return {
         })
 
         remaps.apply()
-        require("copilot_cmp").setup()
     end,
 }

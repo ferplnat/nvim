@@ -6,7 +6,6 @@ return {
 
     dependencies = {
         'rafamadriz/friendly-snippets', -- Snippet library
-        'saadparwaiz1/cmp_luasnip',
     },
 
     config = function()

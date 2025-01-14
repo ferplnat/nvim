@@ -34,16 +34,6 @@ return {
                 },
 
                 {
-                    name = 'buf_info',
-                    callback = funcs.buf_info,
-
-                    highlight = '',
-                    event = { 'LspAttach', 'LspDetach', 'LspRequest', 'BufEnter', 'BufLeave', 'WinEnter', 'WinLeave' },
-                    position = 'left',
-                    eval = false,
-                },
-
-                {
                     name = 'mode',
                     callback = funcs.mode,
                     highlight = 'StatusLineMode',
@@ -58,6 +48,16 @@ return {
                     highlight = '',
                     event = { 'RecordingEnter', 'RecordingLeave' },
                     position = 'center',
+                    eval = false,
+                },
+
+                {
+                    name = 'buf_info',
+                    callback = funcs.buf_info,
+
+                    highlight = '',
+                    event = { 'LspAttach', 'LspDetach', 'LspRequest', 'BufEnter', 'BufLeave', 'WinEnter', 'WinLeave' },
+                    position = 'right',
                     eval = false,
                 },
 
