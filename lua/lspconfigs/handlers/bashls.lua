@@ -3,6 +3,11 @@ return function(capabilities, on_attach)
         cmd = { 'bash-language-server', 'start' },
         capabilities = capabilities,
         on_attach = on_attach,
+        filetypes = {
+            "sh",
+            "bash",
+            "zsh",
+        },
         settings = {
             bashIde = {
                 shellcheckPath = require('marco.utils').get_mason_package_path('shellcheck'),
