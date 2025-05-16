@@ -1,5 +1,6 @@
 --- @module 'lazy.types'
 --- @type LazyPluginSpec
+
 return {
     name = 'telescope',
     [1] = 'nvim-telescope/telescope.nvim',
@@ -8,6 +9,11 @@ return {
         {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-ui-select.nvim',
+
+            {
+                [1] = 'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'make'
+            },
         },
     },
 
