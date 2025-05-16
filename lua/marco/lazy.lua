@@ -37,3 +37,5 @@ require('lazy').setup(
         },
     }
 )
+
+--- @module 'lazy.types'

@@ -1,3 +1,4 @@
+--- @module 'lazy.types'
 --- @type LazyPluginSpec
 return {
     name = 'copilot',

@@ -1,3 +1,4 @@
+--- @module 'lazy.types'
 --- @type LazyPluginSpec
 return {
     name = 'telescope',
@@ -41,7 +42,14 @@ return {
         })
 
         remaps.apply(builtin)
-        require("telescope").load_extension("ui-select")
+
+        if not pcall(require('telescope').load_extension, 'ui-select') then
+            vim.api.nvim_notify('Failed to load extension "ui-select"', vim.log.levels.ERROR, { title = "Telescope" })
+        end
+
+        if not pcall(require('telescope').load_extension, 'fzf') then
+            vim.api.nvim_notify('Failed to load extension "fzf"', vim.log.levels.ERROR, { title = "Telescope" })
+        end
 
         require('plenary.filetype').add_file('extras')
     end,
