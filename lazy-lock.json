@@ -24,6 +24,7 @@
   "nvim-various-textobjs": { "branch": "main", "commit": "74dc9d615837704856d367ac7bc797884220cde2" },
   "oil": { "branch": "master", "commit": "685cdb4ffa74473d75a1b97451f8654ceeab0f4a" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
+  "render-markdown": { "branch": "main", "commit": "048d68028d09ad2e134e7059032b8192a85180b9" },
   "repeat": { "branch": "master", "commit": "65846025c15494983dafe5e3b46c8f88ab2e9635" },
   "roslyn.nvim": { "branch": "main", "commit": "8dc729a651ae980088246caf651e5ff24e21077a" },
   "surround": { "branch": "main", "commit": "0e62500b98f4513feaaf7425c135472457ea5b7d" },
