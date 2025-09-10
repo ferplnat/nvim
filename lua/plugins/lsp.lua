@@ -34,7 +34,6 @@ return {
         local remaps = require('marco.remaps.lsp')
 
         local ensure_installed = {
-            'azure_pipelines_ls',
             'bashls',
             'clangd',
             'dockerls',
@@ -42,7 +41,6 @@ return {
             'html',
             'lua_ls',
             'marksman',
-            'powershell_es',
             'taplo',
             'terraformls',
             'tflint',

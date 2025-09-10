@@ -24,7 +24,6 @@ return {
             'shfmt',
             'sqlfluff',
             'staticcheck',
-            'yamllint',
         }
 
         require('mason-tool-installer').setup({

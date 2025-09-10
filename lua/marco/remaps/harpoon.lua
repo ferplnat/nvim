@@ -45,7 +45,7 @@ M.apply = function(harpoon)
     vim.keymap.set("n", "<C-h>", function() toggle_telescope(harpoon:list()) end,
         { desc = "Open harpoon window" })
 
-    vim.keymap.set("n", "<C-b>", file_added, { desc = "[m]ark current file in harpoon" })
+    vim.keymap.set("n", "<C-i>", file_added, { desc = "Mark current file in harpoon" })
 
     vim.keymap.set("n", "<C-j>", function() harpoon:list():prev() end,
         { desc = "Previous item (harpoon)" })
